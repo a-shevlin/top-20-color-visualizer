@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const nodeExternals = require('webpack-node-externals');
+npm install webpack-node-externals --save - dev
 
 module.exports = {
   entry: './src/index.js',
@@ -9,6 +11,10 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  target: 'node',   // THIS IS THE IMPORTANT PART
+  externals: [nodeExternals()],
+  mode: 'development',
+//}
   devtool: 'eval-source-map',  
   devServer: {                 
     contentBase: './dist'      
@@ -17,7 +23,7 @@ module.exports = {
     new Dotenv(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Shape Tracker',
+      title: 'Spotify Color',
       template: './src/index.html',
       inject: 'body'
     })
