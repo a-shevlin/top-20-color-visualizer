@@ -251,7 +251,7 @@ import SpotifyService from './js/app.js';
   // https://developer.spotify.com/dashboard/applications
   const client_id = process.env.CLIENT_ID;
   // const client_secret = process.env.CLIENT_SECRET;
-  const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
+  const redirect_uri = 'http://localhost:8080/'; // Your redirect uri
 
   // Restore tokens from localStorage
   let access_token = localStorage.getItem('access_token') || null;
@@ -286,15 +286,27 @@ import SpotifyService from './js/app.js';
     document.getElementById('login').style.display = 'unset';
   }
 
-  document
-    .getElementById('login-button')
-    .addEventListener('click', redirectToSpotifyAuthorizeEndpoint, false);
+  $('#login-button').on('click', function() {
+      redirectToSpotifyAuthorizeEndpoint();
+    });
 
-  document
-    .getElementById('refresh-button')
-    .addEventListener('click', refreshToken, false);
+  $('#refresh-button').on('click', function() {
+    refreshToken();
+  });
 
-  document
-    .getElementById('logout-button')
-    .addEventListener('click', logout, false);
+  $('#logout-button').on('click', function() {
+    logout();
+  });
+
+  // document
+  //   .getElementById('login-button')
+  //   .addEventListener('click', redirectToSpotifyAuthorizeEndpoint, false);
+
+  // document
+  // .getElementById('refresh-button')
+  // .addEventListener('click', refreshToken, false);
+
+  // document
+  //   .getElementById('logout-button')
+  //   .addEventListener('click', logout, false);
 })();
