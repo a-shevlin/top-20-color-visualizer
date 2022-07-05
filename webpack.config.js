@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const nodeExternals = require('webpack-node-externals');
 // npm install webpack-node-externals --save -dev
 
 module.exports = {
@@ -11,8 +10,6 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
-  target: 'node',   // THIS IS THE IMPORTANT PART
-  externals: [nodeExternals()],
   mode: 'development',
 //}
   devtool: 'eval-source-map',  
