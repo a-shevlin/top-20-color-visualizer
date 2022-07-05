@@ -1,0 +1,13 @@
+#login,
+#loggedin {
+    display: none;
+}
+
+td {
+    border: grey solid 1px;
+    overflow-wrap: anywhere;
+}
+
+td:first-child {
+    min-width: 150px;
+}
