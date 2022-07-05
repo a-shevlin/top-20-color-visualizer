@@ -51,7 +51,7 @@ import SpotifyService from './js/app.js';
         {
           response_type: 'code',
           client_id,
-          scope: 'user-read-private user-read-email user-top-read',
+          scope: 'user-read-private user-read-email user-top-read web-play-back',
           code_challenge_method: 'S256',
           code_challenge,
           redirect_uri,
@@ -189,6 +189,43 @@ import SpotifyService from './js/app.js';
     })
     .then((data) => {
       console.log(data);
+      for (let i = 0; i < data.items.length; i++) {
+        let table = document.createElement('table');
+        let tr = document.createElement('tr');
+        let tdTitle = document.createElement('td');
+        let td = document.createElement('td');
+        tdTitle.insertCell(`#${i + 1} Artist`);
+        td.insertCell(data.items[i].name);
+        table.innerHTML = tr;
+        tr.innerHTML = tdTitle + td; 
+        $('#playlists').append(table);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      mainPlaceholder.innerHTML = errorTemplate(error.error);
+    });
+  });
+
+  $('#getTopTracks').on('click', function() {
+    fetch('https://api.spotify.com/v1/me/top/tracks', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+    .then(async (response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw await response.json();
+      }
+    })
+    .then((data) => {
+      for (let i = 0; i < data.items.length; i++) {
+        let p = document.createElement('p');
+        p.innerText = `Your #${i + 1} track is ${data.items[i].name}`;
+        $('#playlists').append(p);
+      }
     })
     .catch((error) => {
       console.error(error);
