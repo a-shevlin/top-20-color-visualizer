@@ -1,5 +1,3 @@
 //url= https://api.spotify.com/v1/
 //client ID = ${process.env.CLIENT_ID}
 
-`http://localhost:8080/?code=AQCvvYgaXQxcFGwDmwBk5mwg49yA_AAMBZEp_toDBByn-r25a8k8TOZn6mIkky0bb0ENE2XAoSn0Zxq8bUk8De_OZEuNBs0xV9Sbq0BXVACQgMrZfgsacNjTCWHW66zzFSeFtVIFZ4hdBy-GCc1M1LupBD6mK4t7mHOWACkVyKoLhELsJ-6yYx_wjrFsboxPalp63CRCG9tDVNLsU6yC1uJLekXgSO48jzZLhN7nE_jVx12N3U3a4GL6o2BtpcY16RounpJiHdxvwzMbyeYUtbRb3_HoGdlA9SQ8P7a3P7woQnp3c74ledG8CQKZjYTN4To8nrp0XIeJQeYfvuoEqhEsLvTangmSOLbBSlHp0W-oLpMbd2Bv83TMVa6GUeR79oA-LbPompRF46s6ep2-zsglfEJNcM-cY-VFtYTl0_g`
-
