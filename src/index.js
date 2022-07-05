@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $, { data } from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
@@ -51,7 +51,7 @@ import SpotifyService from './js/app.js';
         {
           response_type: 'code',
           client_id,
-          scope: 'user-read-private user-read-email',
+          scope: 'user-read-private user-read-email user-top-read',
           code_challenge_method: 'S256',
           code_challenge,
           redirect_uri,
@@ -174,6 +174,27 @@ import SpotifyService from './js/app.js';
         mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   }
+  $('#getTopArtist').on('click', function() {
+    fetch('https://api.spotify.com/v1/me/top/artists', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+    .then(async (response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw await response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      mainPlaceholder.innerHTML = errorTemplate(error.error);
+    });
+  });
 
   $('#getPlaylist').on('click', function () {
     fetch('https://api.spotify.com/v1/me/playlists', {
@@ -203,6 +224,7 @@ import SpotifyService from './js/app.js';
   });
 
   function userProfileTemplate(data) {
+    console.log(data);
     return `<h1>Logged in as ${data.display_name}</h1>
       <table>
           <tr><td>Display name</td><td>${data.display_name}</td></tr>
@@ -210,7 +232,7 @@ import SpotifyService from './js/app.js';
           <tr><td>Email</td><td>${data.email}</td></tr>
           <tr><td>Spotify URI</td><td><a href="${data.external_urls.spotify}">${data.external_urls.spotify}</a></td></tr>
           <tr><td>Link</td><td><a href="{{href}">${data.href}</a></td></tr>
-          <tr><td>Profile Image</td><td><a href="${data.images}">${data.images}</a></td></tr>
+          <tr><td>Profile Image</td><td><img src="${data.images[0].url}">${data.images[0].url}</a></td></tr>
           <tr><td>Country</td><td>${data.country}</td></tr>
       </table>`;
   }
@@ -238,7 +260,7 @@ import SpotifyService from './js/app.js';
       <table>
         <tr>
             <td>Status</td>
-            <td>${data.status}</td>
+            <td>${data.message}</td>
         </tr>
         <tr>
             <td>Message</td>
@@ -310,3 +332,12 @@ import SpotifyService from './js/app.js';
   //   .getElementById('logout-button')
   //   .addEventListener('click', logout, false);
 })();
+
+
+// function getRandomInt(max) {
+//   return Math.floor(Math.random() * max);
+// }
+// let randomNumber = getRandomInt(99);
+// let color = "#" + data.colors[randomNumber].hex;
+
+// $('#itemID').css("background", "linear-gradient(" + color1 + color2 + color3 + ")")
