@@ -1,8 +1,8 @@
-# (Application Name)
+# Spotify Color 
 
 #### (Brief Description of Application)
 
-#### By (Your Name Here)
+#### By Alex Shevlin, Seung Lee, Caroline Cerussi, Donovan Weber, Jacob Palaoro
 
 ## Technologies Used
 
