@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const nodeExternals = require('webpack-node-externals');
-npm install webpack-node-externals --save - dev
+// npm install webpack-node-externals --save -dev
 
 module.exports = {
   entry: './src/index.js',
