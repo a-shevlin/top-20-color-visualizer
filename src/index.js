@@ -170,6 +170,7 @@ import SpotifyService from './js/spotify-service.js';
   $('#playlistBody').on('click', 'td', function () {
     console.log('You clicked ' + this.id);
     const id = this.id;
+    $('#tracklistBody').html('');
     SpotifyService.getPlaylistTracks(id, access_token)
       .then(function (response) {
         if (response instanceof Error) {
@@ -177,9 +178,9 @@ import SpotifyService from './js/spotify-service.js';
         }
         console.log(response);
         $('#tracklistTable').show();
-        $('#tracklistTable').html('');
+
         for (let i = 0; i < response.items.length; i++) {
-          console.log(response.items[i]);
+          // console.log(response.items[i]);
           // let li = document.createElement('li');
           // li.innerText = response.items[i].track.name;
           // $('#' + id).append(li);
