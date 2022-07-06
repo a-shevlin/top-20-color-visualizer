@@ -57,7 +57,7 @@ import SpotifyService from './js/spotify-service.js';
           $('#artistBody').append(
             `<tr id="artistName${i+1}">
             <th class="artistNumber" scope="row">${artist}</th>
-            <td class="artistName">${name}</td>
+            <td class="artistName"><strong>${name}</strong></td>
             <tr>`
           );
         }
@@ -82,10 +82,12 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .then((data) => {
+        console.log(data);
         for (let i = 0; i < data.items.length; i++) {
           let track = data.items[i].name;
+          let trackBy = data.items[i].artists[0].name;
           $(`#artistName${i+1}`).append(
-            `<td class="trackName"id="track${i+1}">${track}</td>`
+            `<td class="trackName"id="track${i+1}">${track} by <strong>${trackBy}</strong></td>`
           );
         }
       })

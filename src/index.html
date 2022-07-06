@@ -6,54 +6,54 @@
   </title>
 </head>
 <body>
-<div>
-  <div class="container" id="login">
-    <h1>
-      This is an example of the Authorization Code Flow with Proof Key for
-      Code Exchange (PKCE)
-    </h1>
-    <button id="login-button">
-      Log in with Spotify
-    </button>
-  </div>
-  <div class="container" id="loggedin">
-    <div id="main"></div>
-    <div id="playlists"></div>
-    <div id="topArtists">
-      <table class="table" id="artists">
-        <thead>
-          <th scope="col">Top</th>
-          <th scope="col">Artists</th>
-          <th scope="col">+ Tracks</th>
-        </thead>
-        <tbody id="artistBody">
-        </tbody>
-      </table>
+  <div>
+    <div class="container" id="login">
+      <h1>
+        This is an example of the Authorization Code Flow with Proof Key for
+        Code Exchange (PKCE)
+      </h1>
+      <button id="login-button">
+        Log in with Spotify
+      </button>
     </div>
-    <div id="oauth"></div>
-    <button id="getPlaylist">Get Playlist</button>
-    <button id="getTopArtist">Get Top Artist</button>
-    <button id="getTopTracks">Get Top Tracks</button>
-    <button id="refresh-button">
-      Refresh access token
-    </button>
-    <button id="logout-button">
-      Logout
-    </button>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script>
-window.onSpotifyWebPlaybackSDKReady = () => {
-  const userAccessToken = "[access token]";
-  const webPlayback = new Spotify.Player({
-    name: "Spotify Web Playback SDK",
-    getOAuthToken: callback => { callback(userAccessToken)}
-  });
-  webPlayback.connect();
-};
-</script>
+    <div class="container" id="loggedin">
+      <div id="main"></div>
+      <div id="playlists"></div>
+      <div id="topArtists">
+        <table class="table" id="artists">
+          <thead>
+            <th scope="col">Top</th>
+            <th scope="col">Artists</th>
+            <th scope="col">+ Tracks</th>
+          </thead>
+          <tbody id="artistBody">
+          </tbody>
+        </table>
+      </div>
+      <div id="oauth"></div>
+      <button id="getPlaylist">Get Playlist</button>
+      <button id="getTopArtist">Get Top Artist</button>
+      <button id="getTopTracks">Get Top Tracks</button>
+      <button id="refresh-button">
+        Refresh access token
+      </button>
+      <button id="logout-button">
+        Logout
+      </button>
+      <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  <script>
+  window.onSpotifyWebPlaybackSDKReady = () => {
+    const userAccessToken = "[access token]";
+    const webPlayback = new Spotify.Player({
+      name: "Spotify Web Playback SDK",
+      getOAuthToken: callback => { callback(userAccessToken)}
+    });
+    webPlayback.connect();
+  };
+  </script>
 
+    </div>
   </div>
-</div>
 
 </body>
 </html>
