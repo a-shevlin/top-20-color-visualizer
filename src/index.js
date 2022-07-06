@@ -41,9 +41,7 @@ import SpotifyService from './js/spotify-service.js';
           <div class="jumbotron-fluid">
             <h1>Welcome ${name}<image id="profileImage" src="${image}"></h1>
           </div>
-          `)
-      
-    
+          `);
       })
       .catch((error) => {
         clearMain();
@@ -80,7 +78,9 @@ import SpotifyService from './js/spotify-service.js';
             <td class="artistName"><strong>${name}</strong></td>
             <tr>`
           );
-          $(`#artistName${i + 1}`).append(`<td><img src="${artistImg}"></img></td>`);
+          $(`#artistName${i + 1}`).append(
+            `<td><img src="${artistImg}"></img></td>`
+          );
         }
       })
       .catch((error) => {
@@ -112,10 +112,14 @@ import SpotifyService from './js/spotify-service.js';
           let trackBy = data.items[i].artists[0].name;
           let trackImg = data.items[i].album.images[0].url;
 
-          $(`#artistName${i+1}`).append(
-            `<td class="trackName"id="track${i+1}">${track} by <strong>${trackBy}</strong></td>`
+          $(`#artistName${i + 1}`).append(
+            `<td class="trackName"id="track${
+              i + 1
+            }">${track} by <strong>${trackBy}</strong></td>`
           );
-          $(`#artistName${i + 1}`).append(`<td class=""><img src="${trackImg}"></img></td>`)
+          $(`#artistName${i + 1}`).append(
+            `<td class=""><img src="${trackImg}"></img></td>`
+          );
         }
       })
       .catch((error) => {
@@ -144,13 +148,14 @@ import SpotifyService from './js/spotify-service.js';
         $('#getPlaylist').prop('disabled', true);
         $('#getPlaylist').hide();
         for (let i = 0; i < data.items.length; i++) {
-          let playlist = data.items[i].name
-          let number ="# " + (i + 1);
+          let playlist = data.items[i].name;
+          let id = data.items[i].id;
+          let number = '# ' + (i + 1);
           let url = data.items[i].external_urls.spotify;
           $('#playlistBody').append(
             `<tr id="playlistName${i + 1}">
               <th class="playlistNumber" scope="row">${number}</th>
-              <td class="playlistName"><a href="${url}" target="_blank"><strong>${playlist}</strong></a></td>
+              <td class="userPlaylists" id="${id}"><a href="${url}" target="_blank"><strong>${playlist}</strong></a></td>
             <tr>`
           );
         }
@@ -159,6 +164,38 @@ import SpotifyService from './js/spotify-service.js';
         clearMain();
         console.error(error);
         // mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
+  });
+
+  $('#playlistBody').on('click', 'td', function () {
+    console.log('You clicked ' + this.id);
+    const id = this.id;
+    SpotifyService.getPlaylistTracks(id, access_token)
+      .then(function (response) {
+        if (response instanceof Error) {
+          throw Error('Error getting playlist tracks');
+        }
+        console.log(response);
+        $('#tracklistTable').show();
+        $('#tracklistTable').html('');
+        for (let i = 0; i < response.items.length; i++) {
+          console.log(response.items[i]);
+          // let li = document.createElement('li');
+          // li.innerText = response.items[i].track.name;
+          // $('#' + id).append(li);
+          let trackName = response.items[i].track.name;
+          let number = '# ' + (i + 1);
+          let url = response.items[i].track.external_urls.spotify;
+          $('#tracklistBody').append(
+            `<tr id="tracklistName${i + 1}">
+              <th scope="row">${number}</th>
+              <td class="userPlaylists"><a href="${url}" target="_blank"><strong>${trackName}</strong></a></td>
+            <tr>`
+          );
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   });
 
@@ -285,7 +322,6 @@ import SpotifyService from './js/spotify-service.js';
   } else if (access_token && refresh_token && expires_at) {
     // we are already authorized and reload our tokens from localStorage
     document.getElementById('loggedin').style.display = 'unset';
-
 
     getUserData();
   } else {
