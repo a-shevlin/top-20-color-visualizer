@@ -89,7 +89,48 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = errorTemplate('Error Getting Top Artists');
       });
   });
-
+  $('#changeBackground').on('click', function () {
+    fetch('https://api.spotify.com/v1/me/top/artists', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw await response.json();
+        }
+      })
+      .then((data) => {
+        let array = [];
+        for(let i = 0; i < 5; i++) {
+          let genres = data.items[i].genres;
+          array.push(genres);
+          console.log(genres);
+        }
+        for(let i=0;i<5;i++) {
+          if((array[i].indexOf('dance') + '') > -1) {
+            $("#main").css({"background-image":"linear-gradient(red, yellow)"});
+          } if ((array[i].indexOf('rap') + '') > -1){
+            $("#main").css({"background-image":"linear-gradient(blue, purple)"});
+          } if ((array[i].indexOf('pop') + '') > -1){
+            $("#main").css({"background-image":"linear-gradient(red, aqua)"});
+          } if ((array[i].indexOf("emo") + '') > -1){
+            $("#main").css({"background-image":"linear-gradient(black, white)"});
+          } if ((array[i].indexOf("indie") + '') > -1){
+            $("#main").css({"background-image":"linear-gradient(yellow-green, yellow)"});
+          } else {
+            //
+          }
+        
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
+  });
   $('#getTopTracks').on('click', function () {
     fetch('https://api.spotify.com/v1/me/top/tracks', {
       headers: {
