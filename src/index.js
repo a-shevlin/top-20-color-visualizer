@@ -140,7 +140,7 @@ import SpotifyService from './js/spotify-service.js';
           $('#playlistBody').append(
             `<tr id="playlistName${i + 1}">
               <th class="playlistNumber" scope="row">${number}</th>
-              <td class="playlistName"><a href="${url}"><strong>${playlist}</strong></a></td>
+              <td class="playlistName"><a href="${url}" target="_blank"><strong>${playlist}</strong></a></td>
             <tr>`
           );
         }
