@@ -157,4 +157,22 @@ export default class SpotifyService {
       return error.message;
     }
   }
+
+  static getPlaylistTracks(playlistID, access_token) {
+    playlistID = '4Gm3iY6IWImgitrM6nTIPf';
+    return fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (error) {
+        return Error(error);
+      });
+  }
 }

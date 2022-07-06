@@ -117,16 +117,40 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#playlists').html('');
         for (let i = 0; i < data.items.length; i++) {
-          let p = document.createElement('p');
-          p.innerText = `Playlist${i + 1} is ${data.items[i].name}`;
-          $('#playlists').append(p);
+          let ul = document.createElement('ul');
+          ul.innerText = `Playlist${i + 1} is ${data.items[i].name}`;
+          ul.className = 'userPlaylists';
+          ul.id = data.items[i].id;
+          $('#playlists').append(ul);
         }
       })
       .catch((error) => {
         clearMain();
         console.error(error);
         // mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
+  });
+
+  $('#playlists').on('click', 'ul', function () {
+    console.log('You clicked ' + this.id);
+    const id = this.id;
+    SpotifyService.getPlaylistTracks(id, access_token)
+      .then(function (response) {
+        if (response instanceof Error) {
+          throw Error('Error getting playlist tracks');
+        }
+        console.log(response);
+        for (let i = 0; i < response.items.length; i++) {
+          console.log(response.items[i]);
+          let li = document.createElement('li');
+          li.innerText = response.items[i].track.name;
+          $('#' + id).append(li);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   });
 
