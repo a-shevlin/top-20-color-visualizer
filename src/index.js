@@ -177,6 +177,7 @@ import SpotifyService from './js/spotify-service.js';
         }
         console.log(response);
         $('#tracklistTable').show();
+        $('#tracklistTable').html('');
         for (let i = 0; i < response.items.length; i++) {
           console.log(response.items[i]);
           // let li = document.createElement('li');
