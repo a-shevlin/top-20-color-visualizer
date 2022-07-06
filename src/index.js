@@ -53,9 +53,12 @@ import SpotifyService from './js/spotify-service.js';
         console.log(data);
         for (let i = 0; i < data.items.length; i++) {
           let name = data.items[i].name;
-          let artist = '#' + (i + 1) + ' Artist';
-          $('#artists').append(
-            `<tr><td class="artistNumber" scope="row">${artist}</td><td>${name}</td><tr>`
+          let artist = '#' + (i + 1);
+          $('#artistBody').append(
+            `<tr>
+            <th class="artistNumber" scope="row">${artist}</th>
+            <td>${name}</td>
+            <tr>`
           );
         }
       })
