@@ -30,9 +30,15 @@
 
 ## Known Bugs
 
-* _Any known issues_
-* _should go here_
+* _Not having a profile picture on Spotify account will break part of the website_
+* _Not having listened to music on Spotify beforehand, at least for a day or two, will prevent Top 20 and Profile Background to not function correctly_
 
 ## License
 
 ## Contact Information
+
+* Alex Shevlin <alexshevlin1@gmail.com>
+* Caroline Cerussi <caroceru@gmail.com>
+* Donovan Weber <donovanweber03@gmail.com>
+* Jacob Palaoro <jpalaoro197@gmail.com>
+* Seung Lee <shl7@uw.edu>
