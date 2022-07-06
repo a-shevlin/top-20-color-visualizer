@@ -23,24 +23,31 @@
         <button id="getPlaylist">Get Playlist</button>
         <button id="getTopArtist">Get Top 20</button>
         <button id="getTopTracks"></button>
-        <table class="table table-responsive table-dark" id="artists">
-          <thead>
-            <th scope="col">Top</th>
-            <th scope="col">Artists</th>
-            <th scope="col"></th>
-            <th scope="col">+ Tracks</th>
-            <th scope="col"></th>
-          </thead>
-          <tbody id="artistBody">
-          </tbody>
-        </table>
-        <table class="table table-responsive table-dark" id="playlistTable">
-          <thead>
-            <th scope="col">Most Recent</th>
-            <th scope="col">Playlists</th>
-          </thead>
-          <tbody id="playlistBody"></tbody>
-        </table>
+        <div class="row justify-content-center">
+
+          <div class="col-sm-8">
+            <table class="table table-responsive table-dark" id="artists">
+              <thead>
+                <th scope="col">Top</th>
+                <th scope="col">Artists</th>
+                <th scope="col"></th>
+                <th scope="col">+ Tracks</th>
+                <th scope="col"></th>
+              </thead>
+              <tbody id="artistBody">
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-4">
+            <table class="table table-responsive table-dark" id="playlistTable">
+              <thead>
+                <th scope="col">Most Recent</th>
+                <th scope="col">Playlists</th>
+              </thead>
+              <tbody id="playlistBody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
       <div id="oauth"></div>
       <button id="refresh-button">

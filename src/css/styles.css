@@ -14,7 +14,7 @@ td:first-child {
 
 #artists{
   display: none;
-  width: 900px;
+  width: fit-content;
   margin: auto;
 }
 
@@ -27,11 +27,12 @@ td:first-child {
 }
 
 .artistNumber{
-  width: 50px;
+  width: fit-content;
 }
 
 .artistName {
-  width: 200px;
+  width: fit-content;
+  min-width: 100px;
 }
 
 .trackName {
@@ -40,4 +41,7 @@ td:first-child {
 
 #playlistTable {
   display: none;
+  margin: auto;
+  width: fit-content;
+  max-width: 400px;
 }
