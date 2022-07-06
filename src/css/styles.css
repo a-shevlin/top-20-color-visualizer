@@ -115,4 +115,7 @@ button:active {
 
 #tracklistTable {
   display: none;
+  margin: auto;
+  width: fit-content;
+  max-width: 250px;
 }
