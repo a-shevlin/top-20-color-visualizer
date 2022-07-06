@@ -13,7 +13,11 @@ td:first-child {
 }
 
 #artists{
-  width: 420px;
+  width: 900px;
+}
+
+#artists img {
+  width: 100px;
 }
 
 .artistNumber{
