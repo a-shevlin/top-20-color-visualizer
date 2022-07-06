@@ -13,9 +13,17 @@ td:first-child {
 }
 
 #artists{
-  width: 220px;
+  width: 420px;
 }
 
 .artistNumber{
   width: 50px;
+}
+
+.artistName {
+  width: 200px;
+}
+
+.trackName {
+  width: 200px;
 }
