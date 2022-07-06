@@ -35,6 +35,10 @@
 
 ## License
 
+[GNU](/LICENSE-GNU)
+
+Copyright (c) 2022 Alex Shevlin, Caroline Cerussi, Donovan Weber, Jacob Palaoro, Seung Lee
+
 ## Contact Information
 
 * Alex Shevlin <alexshevlin1@gmail.com>
