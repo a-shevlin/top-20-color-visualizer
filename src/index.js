@@ -110,20 +110,19 @@ import SpotifyService from './js/spotify-service.js';
           console.log(genres);
         }
         for(let i=0;i<5;i++) {
-          if((array[i].indexOf('dance') + '') > -1) {
+          if(array[i].includes('dance')) {
             $("#main").css({"background-image":"linear-gradient(red, yellow)"});
-          } if ((array[i].indexOf('rap') + '') > -1){
+          } if (array[i].includes('rap')){
             $("#main").css({"background-image":"linear-gradient(blue, purple)"});
-          } if ((array[i].indexOf('pop') + '') > -1){
+          } if (array[i].includes('pop')){
             $("#main").css({"background-image":"linear-gradient(red, aqua)"});
-          } if ((array[i].indexOf("emo") + '') > -1){
+          } if (array[i].includes("emo")){
             $("#main").css({"background-image":"linear-gradient(black, white)"});
-          } if ((array[i].indexOf("indie") + '') > -1){
+          } if (array[i].includes("indie")){
             $("#main").css({"background-image":"linear-gradient(yellow-green, yellow)"});
           } else {
             //
           }
-        
         }
       })
       .catch((error) => {
@@ -248,23 +247,6 @@ import SpotifyService from './js/spotify-service.js';
     });
   }
 
-  // function userProfileTemplate(data) {
-  //   console.log(data);
-
-  //   let name = data.display_name;
-  //   // let email = data.id;
-  //   // let spotifyURI = data.external_urls.spotify;
-  //   // let image = data.images[0].url;
-  //   // let country = data.country;
-  //   let profile = `
-  //   <div class="jumbotron>
-  //     <h1>Welcome ${name}</h1>
-  //   </div>
-  //   `
-  //   console.log(profile);
-  //   return profile;
-  // }
-
   function oAuthTemplate(data) {
     return `<h2>oAuth info</h2>
       <table>
@@ -284,21 +266,7 @@ import SpotifyService from './js/spotify-service.js';
   }
 
   function errorTemplate(data) {
-    // if (!data) {
-    //   return `<h2>Error info</h2>
-    //   <table>
-    //     <tr>
-    //         <td>Status</td>
-    //         <td>${data.message}</td>
-    //     </tr>
-    //     <tr>
-    //         <td>Message</td>
-    //         <td>${data.message}</td>
-    //     </tr>
-    //   </table>`;
-    // } else {
     return `<h2>${data}</h2>`;
-    // }
   }
 
   // Your client id from your app in the spotify dashboard:
@@ -391,11 +359,3 @@ import SpotifyService from './js/spotify-service.js';
     logout();
   });
 })();
-
-// function getRandomInt(max) {
-//   return Math.floor(Math.random() * max);
-// }
-// let randomNumber = getRandomInt(99);
-// let color = "#" + data.colors[randomNumber].hex;
-
-// $('#itemID').css("background", "linear-gradient(" + color1 + color2 + color3 + ")")
