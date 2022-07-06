@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import $, { data } from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
@@ -36,6 +36,60 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   }
+  $('#getTopArtist').on('click', function () {
+    fetch('https://api.spotify.com/v1/me/top/artists', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw await response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        for (let i = 0; i < data.items.length; i++) {
+          let name = data.items[i].name;
+          let artist = '#' + (i + 1) + ' Artist';
+          $('#artists').append(
+            `<tr><td class="artistNumber" scope="row">${artist}</td><td>${name}</td><tr>`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
+  });
+
+  $('#getTopTracks').on('click', function () {
+    fetch('https://api.spotify.com/v1/me/top/tracks', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw await response.json();
+        }
+      })
+      .then((data) => {
+        for (let i = 0; i < data.items.length; i++) {
+          let p = document.createElement('p');
+          p.innerText = `Your #${i + 1} track is ${data.items[i].name}`;
+          $('#playlists').append(p);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
+  });
 
   $('#getPlaylist').on('click', function () {
     fetch('https://api.spotify.com/v1/me/playlists', {
@@ -73,6 +127,7 @@ import SpotifyService from './js/spotify-service.js';
   }
 
   function userProfileTemplate(data) {
+    console.log(data);
     return `<h1>Logged in as ${data.display_name}</h1>
       <table>
           <tr><td>Display name</td><td>${data.display_name}</td></tr>
@@ -80,7 +135,7 @@ import SpotifyService from './js/spotify-service.js';
           <tr><td>Email</td><td>${data.email}</td></tr>
           <tr><td>Spotify URI</td><td><a href="${data.external_urls.spotify}">${data.external_urls.spotify}</a></td></tr>
           <tr><td>Link</td><td><a href="{{href}">${data.href}</a></td></tr>
-          <tr><td>Profile Image</td><td><a href="${data.images}">${data.images}</a></td></tr>
+          <tr><td>Profile Image</td><td><img src="${data.images[0].url}">${data.images[0].url}</a></td></tr>
           <tr><td>Country</td><td>${data.country}</td></tr>
       </table>`;
   }
@@ -108,7 +163,7 @@ import SpotifyService from './js/spotify-service.js';
       <table>
         <tr>
             <td>Status</td>
-            <td>${data.status}</td>
+            <td>${data.message}</td>
         </tr>
         <tr>
             <td>Message</td>
@@ -213,3 +268,11 @@ import SpotifyService from './js/spotify-service.js';
     logout();
   });
 })();
+
+// function getRandomInt(max) {
+//   return Math.floor(Math.random() * max);
+// }
+// let randomNumber = getRandomInt(99);
+// let color = "#" + data.colors[randomNumber].hex;
+
+// $('#itemID').css("background", "linear-gradient(" + color1 + color2 + color3 + ")")

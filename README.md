@@ -18,8 +18,13 @@
 ## Setup/Installation Requirements
 
 * _clone repo to pc_
-* _`$npm install --save-dev`_
+* _`$ npm install --save-dev`_
 * _`$ npm audit fix --force`_
+* _go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard) and login to spotify_
+* _click create an app and name it Spotify Color_
+* _click edit settings and paste http://localhost:8080/ into Redirect URIs_
+* _create .env file_
+* _write without quotes "CLIENT_ID=" and paste client id from [spotify](https://developer.spotify.com/dashboard) app_
 * _`$ npm run build`_
 * _`$ npm run start`_
 

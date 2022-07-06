@@ -2,8 +2,7 @@
 <html>
 <head>
   <title>
-    Example of the Authorization Code Flow with Proof Key for Code Exchange
-    (PKCE) with Spotify
+    Spotify Colors
   </title>
   <style type="text/css">
       #login,
@@ -24,7 +23,7 @@
 
 <body>
 <div>
-  <div id="login">
+  <div class="container" id="login">
     <h1>
       This is an example of the Authorization Code Flow with Proof Key for
       Code Exchange (PKCE)
@@ -33,18 +32,34 @@
       Log in with Spotify
     </button>
   </div>
-  <div id="loggedin">
+  <div class="container" id="loggedin">
     <div id="main"></div>
     <div id="playlists"></div>
+    <div id="topArtists">
+      <table class="table" id="artists"></table>
+    </div>
     <div id="oauth"></div>
     <button id="getPlaylist">Get Playlist</button>
+    <button id="getTopArtist">Get Top Artist</button>
+    <button id="getTopTracks">Get Top Tracks</button>
     <button id="refresh-button">
       Refresh access token
     </button>
     <button id="logout-button">
       Logout
     </button>
-    
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script>
+window.onSpotifyWebPlaybackSDKReady = () => {
+  const userAccessToken = "[access token]";
+  const webPlayback = new Spotify.Player({
+    name: "Spotify Web Playback SDK",
+    getOAuthToken: callback => { callback(userAccessToken)}
+  });
+  webPlayback.connect();
+};
+</script>
+
   </div>
 </div>
 
