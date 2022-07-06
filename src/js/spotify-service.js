@@ -159,7 +159,6 @@ export default class SpotifyService {
   }
 
   static getPlaylistTracks(playlistID, access_token) {
-    playlistID = '4Gm3iY6IWImgitrM6nTIPf';
     return fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
       headers: {
         Authorization: `Bearer ${access_token}`,
