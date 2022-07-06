@@ -50,18 +50,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   }
   $('#getTopArtist').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/top/artists', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    return SpotifyService.getTopArtist(access_token)
       .then((data) => {
         console.log(data);
         $('#artists').show();
@@ -112,7 +101,7 @@ import SpotifyService from './js/spotify-service.js';
         for (let i = 0; i < 5; i++) {
           if (array[i].indexOf('dance') + '' > -1) {
             $('#main').css({
-              'background-image': 'linear-gradient(red, yellow)',
+              'background-image': 'linear-gradient(-45deg, red, yellow)',
             });
           }
           if (array[i].indexOf('rap') + '' > -1) {
@@ -122,7 +111,7 @@ import SpotifyService from './js/spotify-service.js';
           }
           if (array[i].indexOf('pop') + '' > -1) {
             $('#main').css({
-              'background-image': 'linear-gradient(red, aqua)',
+              'background-image': 'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
             });
           }
           if (array[i].indexOf('emo') + '' > -1) {
@@ -184,18 +173,7 @@ import SpotifyService from './js/spotify-service.js';
   });
 
   $('#getPlaylist').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/playlists', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    SpotifyService.getPlaylist(access_token)
       .then((data) => {
         // console.log(data);
         $('#playlistTable').show();
@@ -258,41 +236,6 @@ import SpotifyService from './js/spotify-service.js';
     });
   }
 
-  // function userProfileTemplate(data) {
-  //   console.log(data);
-
-  //   let name = data.display_name;
-  //   // let email = data.id;
-  //   // let spotifyURI = data.external_urls.spotify;
-  //   // let image = data.images[0].url;
-  //   // let country = data.country;
-  //   let profile = `
-  //   <div class="jumbotron>
-  //     <h1>Welcome ${name}</h1>
-  //   </div>
-  //   `
-  //   console.log(profile);
-  //   return profile;
-  // }
-
-  function oAuthTemplate(data) {
-    return `<h2>oAuth info</h2>
-      <table>
-        <tr>
-            <td>Access token</td>
-            <td>${data.access_token}</td>
-        </tr>
-        <tr>
-            <td>Refresh token</td>
-            <td>${data.refresh_token}</td>
-        </tr>
-        <tr>
-            <td>Expires at</td>
-            <td>${new Date(parseInt(data.expires_at, 10)).toLocaleString()}</td>
-        </tr>
-      </table>`;
-  }
-
   function errorTemplate(data) {
     // if (!data) {
     //   return `<h2>Error info</h2>
@@ -346,11 +289,11 @@ import SpotifyService from './js/spotify-service.js';
     localStorage.setItem('refresh_token', refresh_token);
     localStorage.setItem('expires_at', expires_at);
 
-    oauthPlaceholder.innerHTML = oAuthTemplate({
-      access_token,
-      refresh_token,
-      expires_at,
-    });
+    // oauthPlaceholder.innerHTML = oAuthTemplate({
+    //   access_token,
+    //   refresh_token,
+    //   expires_at,
+    // });
 
     window.location.reload();
     return [access_token, refresh_token, expires_at];
