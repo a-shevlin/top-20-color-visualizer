@@ -1,4 +1,4 @@
-import $, { data } from 'jquery';
+import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
@@ -104,26 +104,39 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         let array = [];
-        for(let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
           let genres = data.items[i].genres;
           array.push(genres);
           console.log(genres);
         }
-        for(let i=0;i<5;i++) {
-          if((array[i].indexOf('dance') + '') > -1) {
-            $("#main").css({"background-image":"linear-gradient(red, yellow)"});
-          } if ((array[i].indexOf('rap') + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(blue, purple)"});
-          } if ((array[i].indexOf('pop') + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(red, aqua)"});
-          } if ((array[i].indexOf("emo") + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(black, white)"});
-          } if ((array[i].indexOf("indie") + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(yellow-green, yellow)"});
+        for (let i = 0; i < 5; i++) {
+          if (array[i].indexOf('dance') + '' > -1) {
+            $('#main').css({
+              'background-image': 'linear-gradient(red, yellow)',
+            });
+          }
+          if (array[i].indexOf('rap') + '' > -1) {
+            $('#main').css({
+              'background-image': 'linear-gradient(blue, purple)',
+            });
+          }
+          if (array[i].indexOf('pop') + '' > -1) {
+            $('#main').css({
+              'background-image': 'linear-gradient(red, aqua)',
+            });
+          }
+          if (array[i].indexOf('emo') + '' > -1) {
+            $('#main').css({
+              'background-image': 'linear-gradient(black, white)',
+            });
+          }
+          if (array[i].indexOf('indie') + '' > -1) {
+            $('#main').css({
+              'background-image': 'linear-gradient(yellow-green, yellow)',
+            });
           } else {
             //
           }
-        
         }
       })
       .catch((error) => {
@@ -184,7 +197,7 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         $('#playlistTable').show();
         $('#getPlaylist').prop('disabled', true);
         $('#getPlaylist').hide();
@@ -209,7 +222,7 @@ import SpotifyService from './js/spotify-service.js';
   });
 
   $('#playlistBody').on('click', 'td', function () {
-    console.log('You clicked ' + this.id);
+    // console.log('You clicked ' + this.id);
     const id = this.id;
     $('#tracklistBody').html('');
     SpotifyService.getPlaylistTracks(id, access_token)
@@ -217,14 +230,10 @@ import SpotifyService from './js/spotify-service.js';
         if (response instanceof Error) {
           throw Error('Error getting playlist tracks');
         }
-        console.log(response);
+        // console.log(response);
         $('#tracklistTable').show();
 
         for (let i = 0; i < response.items.length; i++) {
-          // console.log(response.items[i]);
-          // let li = document.createElement('li');
-          // li.innerText = response.items[i].track.name;
-          // $('#' + id).append(li);
           let trackName = response.items[i].track.name;
           let number = '# ' + (i + 1);
           let url = response.items[i].track.external_urls.spotify;
