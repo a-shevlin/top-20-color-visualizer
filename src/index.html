@@ -36,7 +36,15 @@
     <div id="main"></div>
     <div id="playlists"></div>
     <div id="topArtists">
-      <table class="table" id="artists"></table>
+      <table class="table table-hover" id="artists">
+        <thead>
+          <tr>
+            <th scope="col">Top</th>
+            <th scope="col"> Artists</th>
+          </tr>
+        </thead>
+        <tbody class="artistBody"></tbody>
+      </table>
     </div>
     <div id="oauth"></div>
     <button id="getPlaylist">Get Playlist</button>

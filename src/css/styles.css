@@ -12,3 +12,10 @@ td:first-child {
     min-width: 150px;
 }
 
+#artists{
+  width: 220px;
+}
+
+.artistNumber{
+  width: 50px;
+}
