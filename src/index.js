@@ -50,18 +50,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   }
   $('#getTopArtist').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/top/artists', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    return SpotifyService.getTopArtist(access_token)
       .then((data) => {
         console.log(data);
         $('#artists').show();
@@ -184,18 +173,7 @@ import SpotifyService from './js/spotify-service.js';
   });
 
   $('#getPlaylist').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/playlists', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    SpotifyService.getPlaylist(access_token)
       .then((data) => {
         // console.log(data);
         $('#playlistTable').show();
@@ -256,41 +234,6 @@ import SpotifyService from './js/spotify-service.js';
       status: error.response.status,
       message: error.error.error_description,
     });
-  }
-
-  // function userProfileTemplate(data) {
-  //   console.log(data);
-
-  //   let name = data.display_name;
-  //   // let email = data.id;
-  //   // let spotifyURI = data.external_urls.spotify;
-  //   // let image = data.images[0].url;
-  //   // let country = data.country;
-  //   let profile = `
-  //   <div class="jumbotron>
-  //     <h1>Welcome ${name}</h1>
-  //   </div>
-  //   `
-  //   console.log(profile);
-  //   return profile;
-  // }
-
-  function oAuthTemplate(data) {
-    return `<h2>oAuth info</h2>
-      <table>
-        <tr>
-            <td>Access token</td>
-            <td>${data.access_token}</td>
-        </tr>
-        <tr>
-            <td>Refresh token</td>
-            <td>${data.refresh_token}</td>
-        </tr>
-        <tr>
-            <td>Expires at</td>
-            <td>${new Date(parseInt(data.expires_at, 10)).toLocaleString()}</td>
-        </tr>
-      </table>`;
   }
 
   function errorTemplate(data) {
