@@ -2,7 +2,6 @@ import $, { data } from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import SpotifyService from './js/app.js';
 
 // User Interface Logic
 
@@ -180,31 +179,25 @@ import SpotifyService from './js/app.js';
         Authorization: 'Bearer ' + access_token,
       },
     })
-    .then(async (response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw await response.json();
-      }
-    })
-    .then((data) => {
-      console.log(data);
-      for (let i = 0; i < data.items.length; i++) {
-        let table = document.createElement('table');
-        let tr = document.createElement('tr');
-        let tdTitle = document.createElement('td');
-        let td = document.createElement('td');
-        tdTitle.insertCell(`#${i + 1} Artist`);
-        td.insertCell(data.items[i].name);
-        table.innerHTML = tr;
-        tr.innerHTML = tdTitle + td; 
-        $('#playlists').append(table);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      mainPlaceholder.innerHTML = errorTemplate(error.error);
-    });
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw await response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        for (let i = 0; i < data.items.length; i++) {
+          let name = data.items[i].name;
+          let artist = "#" + (i + 1) + " Artist"; 
+          $('#artists').append(`<tr><td class="artistNumber" scope="row">${artist}</td><td>${name}</td><tr>`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
   });
 
   $('#getTopTracks').on('click', function() {
@@ -213,24 +206,24 @@ import SpotifyService from './js/app.js';
         Authorization: 'Bearer ' + access_token,
       },
     })
-    .then(async (response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw await response.json();
-      }
-    })
-    .then((data) => {
-      for (let i = 0; i < data.items.length; i++) {
-        let p = document.createElement('p');
-        p.innerText = `Your #${i + 1} track is ${data.items[i].name}`;
-        $('#playlists').append(p);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      mainPlaceholder.innerHTML = errorTemplate(error.error);
-    });
+      .then(async (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw await response.json();
+        }
+      })
+      .then((data) => {
+        for (let i = 0; i < data.items.length; i++) {
+          let p = document.createElement('p');
+          p.innerText = `Your #${i + 1} track is ${data.items[i].name}`;
+          $('#playlists').append(p);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        mainPlaceholder.innerHTML = errorTemplate(error.error);
+      });
   });
 
   $('#getPlaylist').on('click', function () {
@@ -346,8 +339,8 @@ import SpotifyService from './js/app.js';
   }
 
   $('#login-button').on('click', function() {
-      redirectToSpotifyAuthorizeEndpoint();
-    });
+    redirectToSpotifyAuthorizeEndpoint();
+  });
 
   $('#refresh-button').on('click', function() {
     refreshToken();
@@ -356,18 +349,6 @@ import SpotifyService from './js/app.js';
   $('#logout-button').on('click', function() {
     logout();
   });
-
-  // document
-  //   .getElementById('login-button')
-  //   .addEventListener('click', redirectToSpotifyAuthorizeEndpoint, false);
-
-  // document
-  // .getElementById('refresh-button')
-  // .addEventListener('click', refreshToken, false);
-
-  // document
-  //   .getElementById('logout-button')
-  //   .addEventListener('click', logout, false);
 })();
 
 
