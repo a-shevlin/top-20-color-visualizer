@@ -110,16 +110,16 @@ import SpotifyService from './js/spotify-service.js';
           console.log(genres);
         }
         for(let i=0;i<5;i++) {
-          if((array[i].indexOf('dance') + '') > -1) {
-            $("#main").css({"background-image":"linear-gradient(red, yellow)"});
-          } if ((array[i].indexOf('rap') + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(blue, purple)"});
-          } if ((array[i].indexOf('pop') + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(red, aqua)"});
-          } if ((array[i].indexOf("emo") + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(black, white)"});
-          } if ((array[i].indexOf("indie") + '') > -1){
-            $("#main").css({"background-image":"linear-gradient(yellow-green, yellow)"});
+          if((array[i].includes('dance'))) {
+            $("#main").css({"background-color":"linear-gradient(red, yellow) !important"});
+          } if ((array[i].includes('rap'))){
+            $("#main").css({"background-color":"linear-gradient(blue, purple) !important"});
+          } if ((array[i].includes('pop'))){
+            $("#main").css({"background-color":"linear-gradient(red, aqua) !important"});
+          } if ((array[i].includes("emo"))){
+            $("#main").css({"background-color":"linear-gradient(black, white) !important"});
+          } if ((array[i].includes("indie"))){
+            $("#main").css({"background-color":"linear-gradient(yellow-green, yellow) !important"});
           } else {
             //
           }
