@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 html {
   background-color: rgb(44, 226, 114);
 }
 
 body {
   background-color: rgb(44, 226, 114);
+  font-family: 'Rubik', sans-serif;
 }
 
 #login,
@@ -14,6 +17,8 @@ body {
 #main {
   text-align: right;
   background-color: rgb(44, 226, 114);
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
 }
 
 #profileImage {
@@ -25,9 +30,39 @@ body {
   margin-right: 20px;
 }
 
+#getButton {
+  width: 400px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+button {
+  background-color: rgb(100, 100, 100);
+  color: white;
+  display: inline-block;
+  border: 2px inset rgb(87, 87, 87);
+  border-radius: 50px;
+  box-sizing: border-box;
+  box-shadow: 0px 3px rgba(78, 78, 78, 0.582);
+}
+
+button:hover {
+  background-color: rgb(87, 87, 87);
+}
+
+button:active {
+  box-shadow: 0px 1px rgba(78, 78, 78, 0.582);
+  transform: translateY(2px);
+}
+
 #logout-button {
   float: right;
-  margin-right: 20px;
+  margin-right: 33px;
+}
+
+#topTables {
+  margin-top: 50px;
 }
 
 #artists{
