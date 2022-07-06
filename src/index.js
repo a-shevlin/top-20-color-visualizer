@@ -289,11 +289,11 @@ import SpotifyService from './js/spotify-service.js';
     localStorage.setItem('refresh_token', refresh_token);
     localStorage.setItem('expires_at', expires_at);
 
-    oauthPlaceholder.innerHTML = oAuthTemplate({
-      access_token,
-      refresh_token,
-      expires_at,
-    });
+    // oauthPlaceholder.innerHTML = oAuthTemplate({
+    //   access_token,
+    //   refresh_token,
+    //   expires_at,
+    // });
 
     window.location.reload();
     return [access_token, refresh_token, expires_at];

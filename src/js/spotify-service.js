@@ -158,6 +158,23 @@ export default class SpotifyService {
     }
   }
 
+  static getPlaylist(access_token) {
+    return fetch('https://api.spotify.com/v1/me/playlists', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (error) {
+        return Error(error);
+      });
+  }
+
   static getPlaylistTracks(playlistID, access_token) {
     return fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
       headers: {
