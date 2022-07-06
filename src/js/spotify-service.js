@@ -208,4 +208,21 @@ export default class SpotifyService {
         return Error(error);
       });
   }
+
+  static getTopTracks(access_token) {
+    return fetch('https://api.spotify.com/v1/me/top/tracks', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (error) {
+        return Error(error);
+      });
+  }
 }

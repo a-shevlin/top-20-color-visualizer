@@ -50,7 +50,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   }
   $('#getTopArtist').on('click', function () {
-    return SpotifyService.getTopArtist(access_token)
+    SpotifyService.getTopArtist(access_token)
       .then((data) => {
         console.log(data);
         $('#artists').show();
@@ -79,18 +79,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   });
   $('#changeBackground').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/top/artists', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    SpotifyService.getTopArtist(access_token)
       .then((data) => {
         let array = [];
         for (let i = 0; i < 5; i++) {
@@ -134,18 +123,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   });
   $('#getTopTracks').on('click', function () {
-    fetch('https://api.spotify.com/v1/me/top/tracks', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    SpotifyService.getTopTracks(access_token)
       .then((data) => {
         console.log(data);
         $('#getTopTracks').prop('disabled', true);
