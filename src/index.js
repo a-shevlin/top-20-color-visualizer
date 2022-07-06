@@ -30,10 +30,18 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .then((data) => {
-        // console.log(data);
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('loggedin').style.display = 'unset';
-        mainPlaceholder.innerHTML = userProfileTemplate(data);
+        console.log(data);
+        let name = data.display_name;
+        // let spotifyURI = data.external_urls.spotify;
+        let image = data.images[0].url;
+        // let country = data.country;
+        $('#login').hide();
+        $('#loggedin').show();
+        $('#main').html(`
+          <div class="jumbotron-fluid">
+            <h1>Welcome ${name}<image id="profileImage" src="${image}"></h1>
+          </div>
+          `);
       })
       .catch((error) => {
         clearMain();
@@ -56,14 +64,22 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#artists').show();
+        $('#getTopArtist').prop('disabled', true);
+        $('#getTopArtist').hide();
+        $('#getTopTracks').click();
         for (let i = 0; i < data.items.length; i++) {
           let name = data.items[i].name;
           let artist = '#' + (i + 1);
+          let artistImg = data.items[i].images[0].url;
           $('#artistBody').append(
             `<tr id="artistName${i + 1}">
             <th class="artistNumber" scope="row">${artist}</th>
-            <td class="artistName">${name}</td>
+            <td class="artistName"><strong>${name}</strong></td>
             <tr>`
+          );
+          $(`#artistName${i + 1}`).append(
+            `<td><img src="${artistImg}"></img></td>`
           );
         }
       })
@@ -88,10 +104,21 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .then((data) => {
+        console.log(data);
+        $('#getTopTracks').prop('disabled', true);
+        $('#getTopTracks').hide();
         for (let i = 0; i < data.items.length; i++) {
           let track = data.items[i].name;
+          let trackBy = data.items[i].artists[0].name;
+          let trackImg = data.items[i].album.images[0].url;
+
           $(`#artistName${i + 1}`).append(
-            `<td class="trackName"id="track${i + 1}">${track}</td>`
+            `<td class="trackName"id="track${
+              i + 1
+            }">${track} by <strong>${trackBy}</strong></td>`
+          );
+          $(`#artistName${i + 1}`).append(
+            `<td class=""><img src="${trackImg}"></img></td>`
           );
         }
       })
@@ -117,13 +144,20 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
-        $('#playlists').html('');
+        $('#playlistTable').show();
+        $('#getPlaylist').prop('disabled', true);
+        $('#getPlaylist').hide();
         for (let i = 0; i < data.items.length; i++) {
-          let ul = document.createElement('ul');
-          ul.innerText = `Playlist${i + 1} is ${data.items[i].name}`;
-          ul.className = 'userPlaylists';
-          ul.id = data.items[i].id;
-          $('#playlists').append(ul);
+          let playlist = data.items[i].name;
+          let id = data.items[i].id;
+          let number = '# ' + (i + 1);
+          let url = data.items[i].external_urls.spotify;
+          $('#playlistBody').append(
+            `<tr id="playlistName${i + 1}">
+              <th class="playlistNumber" scope="row">${number}</th>
+              <td class="userPlaylists" id="${id}"><a href="${url}" target="_blank"><strong>${playlist}</strong></a></td>
+            <tr>`
+          );
         }
       })
       .catch((error) => {
@@ -133,7 +167,7 @@ import SpotifyService from './js/spotify-service.js';
       });
   });
 
-  $('#playlists').on('click', 'ul', function () {
+  $('#playlistBody').on('click', 'td', function () {
     console.log('You clicked ' + this.id);
     const id = this.id;
     SpotifyService.getPlaylistTracks(id, access_token)
@@ -142,11 +176,21 @@ import SpotifyService from './js/spotify-service.js';
           throw Error('Error getting playlist tracks');
         }
         console.log(response);
+        $('#tracklistTable').show();
         for (let i = 0; i < response.items.length; i++) {
           console.log(response.items[i]);
-          let li = document.createElement('li');
-          li.innerText = response.items[i].track.name;
-          $('#' + id).append(li);
+          // let li = document.createElement('li');
+          // li.innerText = response.items[i].track.name;
+          // $('#' + id).append(li);
+          let trackName = response.items[i].track.name;
+          let number = '# ' + (i + 1);
+          let url = response.items[i].track.external_urls.spotify;
+          $('#tracklistBody').append(
+            `<tr id="tracklistName${i + 1}">
+              <th scope="row">${number}</th>
+              <td class="userPlaylists"><a href="${url}" target="_blank"><strong>${trackName}</strong></a></td>
+            <tr>`
+          );
         }
       })
       .catch(function (error) {
@@ -162,19 +206,22 @@ import SpotifyService from './js/spotify-service.js';
     });
   }
 
-  function userProfileTemplate(data) {
-    console.log(data);
-    return `<h1>Logged in as ${data.display_name}</h1>
-      <table>
-          <tr><td>Display name</td><td>${data.display_name}</td></tr>
-          <tr><td>Id</td><td>${data.id}</td></tr>
-          <tr><td>Email</td><td>${data.email}</td></tr>
-          <tr><td>Spotify URI</td><td><a href="${data.external_urls.spotify}">${data.external_urls.spotify}</a></td></tr>
-          <tr><td>Link</td><td><a href="{{href}">${data.href}</a></td></tr>
-          <tr><td>Profile Image</td><td><img src="${data.images[0].url}">${data.images[0].url}</a></td></tr>
-          <tr><td>Country</td><td>${data.country}</td></tr>
-      </table>`;
-  }
+  // function userProfileTemplate(data) {
+  //   console.log(data);
+
+  //   let name = data.display_name;
+  //   // let email = data.id;
+  //   // let spotifyURI = data.external_urls.spotify;
+  //   // let image = data.images[0].url;
+  //   // let country = data.country;
+  //   let profile = `
+  //   <div class="jumbotron>
+  //     <h1>Welcome ${name}</h1>
+  //   </div>
+  //   `
+  //   console.log(profile);
+  //   return profile;
+  // }
 
   function oAuthTemplate(data) {
     return `<h2>oAuth info</h2>
@@ -274,12 +321,6 @@ import SpotifyService from './js/spotify-service.js';
   } else if (access_token && refresh_token && expires_at) {
     // we are already authorized and reload our tokens from localStorage
     document.getElementById('loggedin').style.display = 'unset';
-
-    oauthPlaceholder.innerHTML = oAuthTemplate({
-      access_token,
-      refresh_token,
-      expires_at,
-    });
 
     getUserData();
   } else {

@@ -1,29 +1,69 @@
+html {
+  background-color: rgb(44, 226, 114);
+}
+
+body {
+  background-color: rgb(44, 226, 114);
+}
+
 #login,
 #loggedin {
     display: none;
 }
 
-td {
-    border: grey solid 1px;
-    overflow-wrap: anywhere;
+#main {
+  text-align: right;
+  background-color: rgb(44, 226, 114);
 }
 
-td:first-child {
-    min-width: 150px;
+#profileImage {
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#logout-button {
+  float: right;
+  margin-right: 20px;
 }
 
 #artists{
-  width: 420px;
+  display: none;
+  width: fit-content;
+  margin: auto;
+}
+
+#getTopTracks {
+  display: none;
+}
+
+#artists img {
+  width: 100px;
 }
 
 .artistNumber{
-  width: 50px;
+  width: fit-content;
 }
 
 .artistName {
-  width: 200px;
+  width: fit-content;
+  min-width: 100px;
 }
 
 .trackName {
   width: 200px;
+}
+
+#playlistTable {
+  display: none;
+  margin: auto;
+  width: fit-content;
+  max-width: 400px;
+}
+
+#tracklistTable {
+  display: none;
 }
