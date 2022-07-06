@@ -20,20 +20,29 @@
       <div id="main"></div>
       <div id="playlists"></div>
       <div id="topArtists">
-        <table class="table" id="artists">
+        <button id="getPlaylist">Get Playlist</button>
+        <button id="getTopArtist">Get Top 20</button>
+        <button id="getTopTracks"></button>
+        <table class="table table-responsive table-dark" id="artists">
           <thead>
             <th scope="col">Top</th>
             <th scope="col">Artists</th>
+            <th scope="col"></th>
             <th scope="col">+ Tracks</th>
+            <th scope="col"></th>
           </thead>
           <tbody id="artistBody">
           </tbody>
         </table>
+        <table class="table table-responsive table-dark" id="playlistTable">
+          <thead>
+            <th scope="col">Most Recent</th>
+            <th scope="col">Playlists</th>
+          </thead>
+          <tbody id="playlistBody"></tbody>
+        </table>
       </div>
       <div id="oauth"></div>
-      <button id="getPlaylist">Get Playlist</button>
-      <button id="getTopArtist">Get Top Artist</button>
-      <button id="getTopTracks">Get Top Tracks</button>
       <button id="refresh-button">
         Refresh access token
       </button>

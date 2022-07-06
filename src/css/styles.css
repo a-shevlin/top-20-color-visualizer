@@ -13,7 +13,13 @@ td:first-child {
 }
 
 #artists{
+  display: none;
   width: 900px;
+  margin: auto;
+}
+
+#getTopTracks {
+  display: none;
 }
 
 #artists img {
@@ -30,4 +36,8 @@ td:first-child {
 
 .trackName {
   width: 200px;
+}
+
+#playlistTable {
+  display: none;
 }

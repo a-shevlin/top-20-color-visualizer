@@ -56,7 +56,10 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#artists').show();
         $('#getTopArtist').prop('disabled', true);
+        $('#getTopArtist').hide();
+        $('#getTopTracks').click();
         for (let i = 0; i < data.items.length; i++) {
           let name = data.items[i].name;
           let artist = '#' + (i + 1);
@@ -93,6 +96,7 @@ import SpotifyService from './js/spotify-service.js';
       .then((data) => {
         console.log(data);
         $('#getTopTracks').prop('disabled', true);
+        $('#getTopTracks').hide();
         for (let i = 0; i < data.items.length; i++) {
           let track = data.items[i].name;
           let trackBy = data.items[i].artists[0].name;
@@ -126,10 +130,18 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#playlistTable').show();
+        $('#getPlaylist').prop('disabled', true);
+        $('#getPlaylist').hide();
         for (let i = 0; i < data.items.length; i++) {
-          let p = document.createElement('p');
-          p.innerText = `Playlist${i + 1} is ${data.items[i].name}`;
-          $('#playlists').append(p);
+          let playlist = data.items[i].name
+          let number ="# " + (i + 1);
+          $('#playlistBody').append(
+            `<tr id="playlistName${i + 1}">
+              <th class="artistNumber" scope="row">${number}</th>
+              <td class="artistName"><strong>${playlist}</strong></td>
+            <tr>`
+          );
         }
       })
       .catch((error) => {
