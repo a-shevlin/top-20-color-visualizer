@@ -56,15 +56,18 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#getTopArtist').prop('disabled', true);
         for (let i = 0; i < data.items.length; i++) {
           let name = data.items[i].name;
           let artist = '#' + (i + 1);
+          let artistImg = data.items[i].images[0].url;
           $('#artistBody').append(
             `<tr id="artistName${i + 1}">
             <th class="artistNumber" scope="row">${artist}</th>
             <td class="artistName"><strong>${name}</strong></td>
             <tr>`
           );
+          $(`#artistName${i + 1}`).append(`<td><img src="${artistImg}"></img></td>`);
         }
       })
       .catch((error) => {
@@ -89,12 +92,16 @@ import SpotifyService from './js/spotify-service.js';
       })
       .then((data) => {
         console.log(data);
+        $('#getTopTracks').prop('disabled', true);
         for (let i = 0; i < data.items.length; i++) {
           let track = data.items[i].name;
           let trackBy = data.items[i].artists[0].name;
+          let trackImg = data.items[i].album.images[0].url;
+
           $(`#artistName${i+1}`).append(
             `<td class="trackName"id="track${i+1}">${track} by <strong>${trackBy}</strong></td>`
           );
+          $(`#artistName${i + 1}`).append(`<td class=""><img src="${trackImg}"></img></td>`)
         }
       })
       .catch((error) => {
