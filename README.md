@@ -42,3 +42,8 @@
 * Donovan Weber <donovanweber03@gmail.com>
 * Jacob Palaoro <jpalaoro197@gmail.com>
 * Seung Lee <shl7@uw.edu>
+
+## Special Thanks 
+
+tobika for the Spotify PKCE example
+* <https://github.com/tobika/spotify-auth-PKCE-example>
