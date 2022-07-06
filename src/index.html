@@ -4,23 +4,7 @@
   <title>
     Spotify Colors
   </title>
-  <style type="text/css">
-      #login,
-      #loggedin {
-          display: none;
-      }
-
-      td {
-          border: grey solid 1px;
-          overflow-wrap: anywhere;
-      }
-
-      td:first-child {
-          min-width: 150px;
-      }
-  </style>
 </head>
-
 <body>
 <div>
   <div class="container" id="login">
@@ -36,7 +20,15 @@
     <div id="main"></div>
     <div id="playlists"></div>
     <div id="topArtists">
-      <table class="table" id="artists"></table>
+      <table class="table" id="artists">
+        <thead>
+          <th scope="col">Top</th>
+          <th scope="col">Artists</th>
+          <th scope="col">+ Tracks</th>
+        </thead>
+        <tbody id="artistBody">
+        </tbody>
+      </table>
     </div>
     <div id="oauth"></div>
     <button id="getPlaylist">Get Playlist</button>

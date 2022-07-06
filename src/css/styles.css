@@ -12,3 +12,18 @@ td:first-child {
     min-width: 150px;
 }
 
+#artists{
+  width: 420px;
+}
+
+.artistNumber{
+  width: 50px;
+}
+
+.artistName {
+  width: 200px;
+}
+
+.trackName {
+  width: 200px;
+}
