@@ -30,10 +30,20 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .then((data) => {
-        // console.log(data);
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('loggedin').style.display = 'unset';
-        mainPlaceholder.innerHTML = userProfileTemplate(data);
+        console.log(data);
+        let name = data.display_name;
+        // let spotifyURI = data.external_urls.spotify;
+        let image = data.images[0].url;
+        // let country = data.country;
+        $('#login').hide();
+        $('#loggedin').show();
+        $('#main').html(`
+          <div class="jumbotron-fluid">
+            <h1>Welcome ${name}<image id="profileImage" src="${image}"></h1>
+          </div>
+          `)
+      
+    
       })
       .catch((error) => {
         clearMain();
@@ -160,19 +170,22 @@ import SpotifyService from './js/spotify-service.js';
     });
   }
 
-  function userProfileTemplate(data) {
-    console.log(data);
-    return `<h1>Logged in as ${data.display_name}</h1>
-      <table>
-          <tr><td>Display name</td><td>${data.display_name}</td></tr>
-          <tr><td>Id</td><td>${data.id}</td></tr>
-          <tr><td>Email</td><td>${data.email}</td></tr>
-          <tr><td>Spotify URI</td><td><a href="${data.external_urls.spotify}">${data.external_urls.spotify}</a></td></tr>
-          <tr><td>Link</td><td><a href="{{href}">${data.href}</a></td></tr>
-          <tr><td>Profile Image</td><td><img src="${data.images[0].url}">${data.images[0].url}</a></td></tr>
-          <tr><td>Country</td><td>${data.country}</td></tr>
-      </table>`;
-  }
+  // function userProfileTemplate(data) {
+  //   console.log(data);
+
+  //   let name = data.display_name;
+  //   // let email = data.id;
+  //   // let spotifyURI = data.external_urls.spotify;
+  //   // let image = data.images[0].url;
+  //   // let country = data.country;
+  //   let profile = `
+  //   <div class="jumbotron>
+  //     <h1>Welcome ${name}</h1>
+  //   </div>
+  //   `
+  //   console.log(profile);
+  //   return profile;
+  // }
 
   function oAuthTemplate(data) {
     return `<h2>oAuth info</h2>
@@ -273,11 +286,6 @@ import SpotifyService from './js/spotify-service.js';
     // we are already authorized and reload our tokens from localStorage
     document.getElementById('loggedin').style.display = 'unset';
 
-    oauthPlaceholder.innerHTML = oAuthTemplate({
-      access_token,
-      refresh_token,
-      expires_at,
-    });
 
     getUserData();
   } else {
