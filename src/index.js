@@ -136,10 +136,11 @@ import SpotifyService from './js/spotify-service.js';
         for (let i = 0; i < data.items.length; i++) {
           let playlist = data.items[i].name
           let number ="# " + (i + 1);
+          let url = data.items[i].external_urls.spotify;
           $('#playlistBody').append(
             `<tr id="playlistName${i + 1}">
               <th class="playlistNumber" scope="row">${number}</th>
-              <td class="playlistName"><strong>${playlist}</strong></td>
+              <td class="playlistName"><a href="${url}"><strong>${playlist}</strong></a></td>
             <tr>`
           );
         }
