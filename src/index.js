@@ -37,7 +37,7 @@ import SpotifyService from './js/spotify-service.js';
         // let country = data.country;
         $('#login').hide();
         $('#loggedin').show();
-        $('#main').html(`
+        $('#main').prepend(`
           <div class="jumbotron-fluid">
             <h1>Welcome ${name}<image id="profileImage" src="${image}"></h1>
           </div>
@@ -180,6 +180,9 @@ import SpotifyService from './js/spotify-service.js';
         $('#tracklistTable').html('');
         for (let i = 0; i < response.items.length; i++) {
           console.log(response.items[i]);
+
+        for (let i = 0; i < response.items.length; i++) {
+          // console.log(response.items[i]);
           // let li = document.createElement('li');
           // li.innerText = response.items[i].track.name;
           // $('#' + id).append(li);
