@@ -12,6 +12,10 @@ import SpotifyService from './js/spotify-service.js';
     window.location.reload();
   }
 
+  function clearMain() {
+    mainPlaceholder.innerHTML = '';
+  }
+
   function getUserData() {
     fetch('https://api.spotify.com/v1/me', {
       headers: {
@@ -32,8 +36,9 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = userProfileTemplate(data);
       })
       .catch((error) => {
+        clearMain();
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate(error.error);
+        mainPlaceholder.innerHTML = errorTemplate('Error Getting User Data');
       });
   }
   $('#getTopArtist').on('click', function () {
@@ -60,8 +65,9 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .catch((error) => {
+        clearMain();
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate(error.error);
+        mainPlaceholder.innerHTML = errorTemplate('Error Getting Top Artists');
       });
   });
 
@@ -86,8 +92,9 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .catch((error) => {
+        clearMain();
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate(error.error);
+        // mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   });
 
@@ -113,8 +120,9 @@ import SpotifyService from './js/spotify-service.js';
         }
       })
       .catch((error) => {
+        clearMain();
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate(error.error);
+        // mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   });
 
@@ -159,17 +167,21 @@ import SpotifyService from './js/spotify-service.js';
   }
 
   function errorTemplate(data) {
-    return `<h2>Error info</h2>
-      <table>
-        <tr>
-            <td>Status</td>
-            <td>${data.message}</td>
-        </tr>
-        <tr>
-            <td>Message</td>
-            <td>${data.message}</td>
-        </tr>
-      </table>`;
+    // if (!data) {
+    //   return `<h2>Error info</h2>
+    //   <table>
+    //     <tr>
+    //         <td>Status</td>
+    //         <td>${data.message}</td>
+    //     </tr>
+    //     <tr>
+    //         <td>Message</td>
+    //         <td>${data.message}</td>
+    //     </tr>
+    //   </table>`;
+    // } else {
+    return `<h2>${data}</h2>`;
+    // }
   }
 
   // Your client id from your app in the spotify dashboard:

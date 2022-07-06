@@ -50,14 +50,14 @@
     </button>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script>
-window.onSpotifyWebPlaybackSDKReady = () => {
-  const userAccessToken = "[access token]";
-  const webPlayback = new Spotify.Player({
-    name: "Spotify Web Playback SDK",
-    getOAuthToken: callback => { callback(userAccessToken)}
-  });
-  webPlayback.connect();
-};
+// window.onSpotifyWebPlaybackSDKReady = () => {
+//   const userAccessToken = localStorage.getItem('access_token');
+//   const webPlayback = new Spotify.Player({
+//     name: "Spotify Web Playback SDK",
+//     getOAuthToken: callback => { callback(userAccessToken)}
+//   });
+//   webPlayback.connect();
+// };
 </script>
 
   </div>
