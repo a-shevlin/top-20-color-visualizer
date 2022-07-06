@@ -60,7 +60,7 @@ import SpotifyService from './js/spotify-service.js';
           let name = data.items[i].name;
           let artist = '#' + (i + 1);
           $('#artistBody').append(
-            `<tr id="artistName${i+1}">
+            `<tr id="artistName${i + 1}">
             <th class="artistNumber" scope="row">${artist}</th>
             <td class="artistName">${name}</td>
             <tr>`
@@ -90,8 +90,8 @@ import SpotifyService from './js/spotify-service.js';
       .then((data) => {
         for (let i = 0; i < data.items.length; i++) {
           let track = data.items[i].name;
-          $(`#artistName${i+1}`).append(
-            `<td class="trackName"id="track${i+1}">${track}</td>`
+          $(`#artistName${i + 1}`).append(
+            `<td class="trackName"id="track${i + 1}">${track}</td>`
           );
         }
       })
