@@ -33,6 +33,8 @@ body {
   text-align: right;
   font-family: 'Rubik', sans-serif;
   font-weight: 300;
+  animation: gradient 4s ease infinite;
+  background-size: 400% 400%;
 }
 
 #profileImage {
