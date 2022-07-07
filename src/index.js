@@ -73,7 +73,7 @@ import SpotifyService from './js/spotify-service.js';
         let length = getRandomInt(20);
         console.log(length);
         let array = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < data.items.length; i++) {
           let genres = data.items[i].genres;
           genres.forEach(element => {
             let split = element.split(" ");
@@ -117,6 +117,7 @@ import SpotifyService from './js/spotify-service.js';
               'background-image': 'linear-gradient(yellow-green, yellow)',
             });
           } else {
+            console.log('else');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(dark-blue, green)',
