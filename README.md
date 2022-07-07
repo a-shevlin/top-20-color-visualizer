@@ -14,6 +14,8 @@
 * _See **package.json** for full list of dependencies._
 
 ## Description
+
+This webpage allows a user to sign into spotify. Upon signing in they get the option to display their top 20 artists, tracks, and most recent playlists. Users get the option to display a visualizer from the genres generated in their top tracks.
 ## Setup/Installation Requirements
 
 * _clone repo to pc_
