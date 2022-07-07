@@ -21,9 +21,7 @@ import SpotifyService from './js/spotify-service.js';
       .then((data) => {
         console.log(data);
         let name = data.display_name;
-        // let spotifyURI = data.external_urls.spotify;
         let image = data.images[0].url;
-        // let country = data.country;
         localStorage.setItem('product', data.product);
 
         $('#login').hide();
@@ -46,14 +44,12 @@ import SpotifyService from './js/spotify-service.js';
           }
           processTokenResponse(response);
         });
-        // mainPlaceholder.innerHTML = errorTemplate('Error Getting User Data');
       });
   }
 
   $('#getTopArtist').on('click', function () {
-    SpotifyService.getTopArtist(access_token)
+    SpotifyService.getTopArtists(access_token)
       .then((data) => {
-        console.log(data);
         $('#artists').show();
         $('#getTopArtist').prop('disabled', true);
         $('#getTopArtist').hide();
@@ -80,10 +76,9 @@ import SpotifyService from './js/spotify-service.js';
       });
   });
   $('#changeBackground').on('click', function () {
-    SpotifyService.getTopArtist(access_token)
+    SpotifyService.getTopArtists(access_token)
       .then((data) => {
         let length = getRandomInt(20);
-        console.log(length);
         let array = [];
         for (let i = 0; i < data.items.length; i++) {
           let genres = data.items[i].genres;
@@ -94,38 +89,32 @@ import SpotifyService from './js/spotify-service.js';
         }
         for (let i = 0; i < length; i++) {
           if (array[i].includes('dance') === true) {
-            console.log('dance');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
             });
           } else if (array[i].includes('rap') === true) {
-            console.log('rap');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(blue, purple)',
             });
           } else if (array[i].includes('pop') === true) {
-            console.log('pop');
             $('.overlay').show();
             $('.overlay').css({
               'background-image':
                 'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
             });
           } else if (array[i].includes('emo') === true) {
-            console.log('emo');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(black, white)',
             });
           } else if (array[i].includes('punk') === true) {
-            console.log('punk');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(yellow-green, yellow)',
             });
           } else {
-            console.log('else');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(dark-blue, green)',
@@ -145,7 +134,6 @@ import SpotifyService from './js/spotify-service.js';
   $('#getTopTracks').on('click', function () {
     SpotifyService.getTopTracks(access_token)
       .then((data) => {
-        console.log(data);
         $('#getTopTracks').prop('disabled', true);
         $('#getTopTracks').hide();
         for (let i = 0; i < data.items.length; i++) {
@@ -165,15 +153,13 @@ import SpotifyService from './js/spotify-service.js';
       })
       .catch((error) => {
         clearMain();
-        console.error(error);
-        // mainPlaceholder.innerHTML = errorTemplate(error.error);
+        console.log(error);
       });
   });
 
   $('#getPlaylist').on('click', function () {
     SpotifyService.getPlaylist(access_token)
       .then((data) => {
-        // console.log(data);
         $('#playlistTable').show();
         $('#getPlaylist').prop('disabled', true);
         $('#getPlaylist').hide();
@@ -206,12 +192,10 @@ import SpotifyService from './js/spotify-service.js';
         }
         let premium =
           localStorage.getItem('product') === 'premium' ? true : false;
-        // console.log(response);
         if (!premium) {
           $('#tracklistTable').show();
           $('#tracklistiFrame').hide();
           for (let i = 0; i < response.items.length; i++) {
-            // console.log(response.items[i]);
             const trackName = response.items[i].track.name;
             const number = '# ' + (i + 1);
             const url = response.items[i].track.external_urls.spotify;
@@ -259,29 +243,11 @@ import SpotifyService from './js/spotify-service.js';
   }
 
   function errorTemplate(data) {
-    // if (!data) {
-    //   return `<h2>Error info</h2>
-    //   <table>
-    //     <tr>
-    //         <td>Status</td>
-    //         <td>${data.message}</td>
-    //     </tr>
-    //     <tr>
-    //         <td>Message</td>
-    //         <td>${data.message}</td>
-    //     </tr>
-    //   </table>`;
-    // } else {
     return `<h2>${data}</h2>`;
-    // }
   }
 
-  // Your client id from your app in the spotify dashboard:
-  // https://developer.spotify.com/dashboard/applications
   const client_id = process.env.CLIENT_ID;
-  // const client_secret = process.env.CLIENT_SECRET;
   // Your redirect uri
-  // const redirect_uri = process.env.REDIRECT_URI;
   const redirect_uri = `http://localhost:8080/`;
 
   // Restore tokens from localStorage
@@ -292,16 +258,13 @@ import SpotifyService from './js/spotify-service.js';
 
   // References for HTML rendering
   const mainPlaceholder = document.getElementById('main');
-  // const oauthPlaceholder = document.getElementById('oauth');
 
   // If the user has accepted the authorize request spotify will come back to your application with the code in the response query string
-  // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
   const args = new URLSearchParams(window.location.search);
   const code = args.get('code');
 
+  // stores token information and expiry in local storage
   function processTokenResponse(data) {
-    console.log(data);
-
     let access_token = data.access_token;
     let refresh_token = data.refresh_token;
 
@@ -311,12 +274,6 @@ import SpotifyService from './js/spotify-service.js';
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('refresh_token', refresh_token);
     localStorage.setItem('expires_at', expires_at);
-
-    // oauthPlaceholder.innerHTML = oAuthTemplate({
-    //   access_token,
-    //   refresh_token,
-    //   expires_at,
-    // });
 
     window.location.reload();
     return [access_token, refresh_token, expires_at];
@@ -366,12 +323,8 @@ import SpotifyService from './js/spotify-service.js';
   $('#logout-button').on('click', function () {
     logout();
   });
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 })();
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-// let randomNumber = getRandomInt(99);
-// let color = "#" + data.colors[randomNumber].hex;
-
-// $('#itemID').css("background", "linear-gradient(" + color1 + color2 + color3 + ")")

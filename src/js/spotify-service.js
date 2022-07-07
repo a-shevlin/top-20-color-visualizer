@@ -1,7 +1,5 @@
-//url= https://api.spotify.com/v1/
-//client ID = ${process.env.CLIENT_ID}
-
 export default class SpotifyService {
+  // sends request to spotify for login
   static redirectToSpotifyAuthorizeEndpoint(client_id, redirect_uri) {
     const codeVerifier = this.generateRandomString(64);
 
@@ -21,6 +19,7 @@ export default class SpotifyService {
     });
   }
 
+  // returns a random string of specified length
   static generateRandomString(length) {
     let text = '';
     const possible =
@@ -32,6 +31,7 @@ export default class SpotifyService {
     return text;
   }
 
+  // return code challenge built from code verifier
   static async generateCodeChallenge(codeVerifier) {
     const digest = await crypto.subtle.digest(
       'SHA-256',
@@ -51,6 +51,7 @@ export default class SpotifyService {
     return urlObject.toString();
   }
 
+  // returns access token and refresh token
   static exchangeToken(code, client_id, redirect_uri) {
     const code_verifier = localStorage.getItem('code_verifier');
 
@@ -75,6 +76,7 @@ export default class SpotifyService {
       });
   }
 
+  // refreshes token - used when token expires
   static refreshToken(client_id, refresh_token) {
     return fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
@@ -104,22 +106,7 @@ export default class SpotifyService {
     }
   }
 
-  static processTokenResponse(data) {
-    console.log(data);
-    data = data.json();
-    let access_token = data.access_token;
-    let refresh_token = data.refresh_token;
-
-    const t = new Date();
-    let expires_at = t.setSeconds(t.getSeconds() + data.expires_in);
-
-    localStorage.setItem('access_token', access_token);
-    localStorage.setItem('refresh_token', refresh_token);
-    localStorage.setItem('expires_at', expires_at);
-
-    return [access_token, refresh_token, expires_at];
-  }
-
+  // returns user data in JSON
   static getUserData(access_token) {
     return fetch('https://api.spotify.com/v1/me', {
       headers: {
@@ -137,6 +124,7 @@ export default class SpotifyService {
       });
   }
 
+  // returns user's playlist in JSON
   static getPlaylist(access_token) {
     return fetch('https://api.spotify.com/v1/me/playlists', {
       headers: {
@@ -154,6 +142,7 @@ export default class SpotifyService {
       });
   }
 
+  // returns tracks of playlist with playlistID in JSON
   static getPlaylistTracks(playlistID, access_token) {
     return fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
       headers: {
@@ -171,7 +160,8 @@ export default class SpotifyService {
       });
   }
 
-  static getTopArtist(access_token) {
+  // returns top artists of user in JSON
+  static getTopArtists(access_token) {
     return fetch('https://api.spotify.com/v1/me/top/artists', {
       headers: {
         Authorization: 'Bearer ' + access_token,
@@ -188,6 +178,7 @@ export default class SpotifyService {
       });
   }
 
+  // returns top tracks of the user in JSON
   static getTopTracks(access_token) {
     return fetch('https://api.spotify.com/v1/me/top/tracks', {
       headers: {
@@ -205,6 +196,7 @@ export default class SpotifyService {
       });
   }
 
+  // returns information about track with track_id in JSON
   static getTrack(access_token, track_id) {
     return fetch(`https://api.spotify.com/v1/tracks/${track_id}`, {
       headers: {
