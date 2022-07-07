@@ -95,7 +95,7 @@ import SpotifyService from './js/spotify-service.js';
           }
           if (array[i].indexOf('rap') + '' > -1) {
             $('#main').css({
-              'background-image': 'linear-gradient(blue, purple)',
+              'background-image': 'linear-gradient(-45deg, blue, purple)',
             });
           }
           if (array[i].indexOf('pop') + '' > -1) {
@@ -105,15 +105,15 @@ import SpotifyService from './js/spotify-service.js';
           }
           if (array[i].indexOf('emo') + '' > -1) {
             $('#main').css({
-              'background-image': 'linear-gradient(black, white)',
+              'background-image': 'linear-gradient(-45deg, black, white)',
             });
           }
           if (array[i].indexOf('indie') + '' > -1) {
             $('#main').css({
-              'background-image': 'linear-gradient(yellow-green, yellow)',
+              'background-image': 'linear-gradient(-45deg, yellow-green, yellow)',
             });
           } else {
-            //
+            $('#main').css({'background-image': 'linear-gradient(-45deg orange, green)'});
           }
         }
       })
