@@ -67,13 +67,15 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = errorTemplate('Error Getting Top Artists');
       });
   });
+  //$('#changeBackground').css('cursor', 'pointer')
   $('#changeBackground').on('click', function () {
     SpotifyService.getTopArtist(access_token)
       .then((data) => {
         let length = getRandomInt(20);
         console.log(length);
         let array = [];
-        for (let i = 0; i < 5; i++) {
+        console.log(data.items[0].genres)
+        for (let i = 0; i < data.items.length; i++) {
           let genres = data.items[i].genres;
           genres.forEach(element => {
             let split = element.split(" ");
