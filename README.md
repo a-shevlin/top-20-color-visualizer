@@ -35,6 +35,7 @@
 *_not all genres are listed, so visualizer wont always work. so you have to press visualizer multiple times to work sometimes.
 *_if click playlist before top 20, sometimes top 20 will appear out of place.  
 
+
 ## License
 
 [GNU](/LICENSE-GNU)
