@@ -98,6 +98,22 @@ button:active {
   transform: translateY(2px);
 }
 
+a {
+  color: white;
+}
+
+a:hover {
+  color: rgba(27, 102, 58, 0.856);
+}
+
+a:visited {
+  color: lightgray;
+}
+
+a:hover:visited {
+  color: rgba(24, 87, 50, 0.856);
+}
+
 #logout-button {
   float: right;
   margin-right: 33px;
@@ -110,10 +126,16 @@ button:active {
 
 .table {
   opacity: 90%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 #artists{
   display: none;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
   width: fit-content;
   margin: auto;
 }
@@ -138,6 +160,9 @@ button:active {
 
 #playlistTable {
   display: none;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
   margin: auto;
   width: fit-content;
   max-width: 400px;
@@ -177,5 +202,6 @@ button:active {
 .overlay h1 {
   cursor: pointer;
   text-align: center;
+  font-size: 20px;
   text-shadow: -1px 1px rgba(202, 202, 202, 0.692);
 }
