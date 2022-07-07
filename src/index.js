@@ -84,31 +84,35 @@ import SpotifyService from './js/spotify-service.js';
         let array = [];
         for (let i = 0; i < 5; i++) {
           let genres = data.items[i].genres;
-          array.push(genres);
-          console.log(genres);
-        }
+          genres.forEach(element => {
+            let split = element.split(" ");
+            array.push(split);
+          });
+        } 
         for (let i = 0; i < 5; i++) {
-          if (array[i].indexOf('dance') + '' > -1) {
+          console.log(array[i]);
+          if (array[i].includes('pop') === true) {
             $('#main').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
+            
             });
           }
-          if (array[i].indexOf('rap') + '' > -1) {
+          if (array[i].includes('rap') === true) {
             $('#main').css({
               'background-image': 'linear-gradient(-45deg, blue, purple)',
             });
           }
-          if (array[i].indexOf('pop') + '' > -1) {
+          if (array[i].includes('pysch') === true) {
             $('#main').css({
               'background-image': 'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
             });
           }
-          if (array[i].indexOf('emo') + '' > -1) {
+          if (array[i].includes('emo') === true) {
             $('#main').css({
               'background-image': 'linear-gradient(-45deg, black, white)',
             });
           }
-          if (array[i].indexOf('indie') + '' > -1) {
+          if (array[i].includes('indie') === true) {
             $('#main').css({
               'background-image': 'linear-gradient(-45deg, yellow-green, yellow)',
             });
