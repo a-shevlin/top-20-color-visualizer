@@ -97,7 +97,6 @@ import SpotifyService from './js/spotify-service.js';
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
-            
             });
           } else if (array[i].includes('rap') === true) {
             console.log('rap');
@@ -218,12 +217,14 @@ import SpotifyService from './js/spotify-service.js';
           }
           const id = response.items[i].track.id;
 
+          const audioElement = `<audio controls src=${previewURL}>Your browser does not suppor the <code>audio</code> element.</audio>`;
+
           $('#tracklistBody').append(
             `<tr id="tracklistName${i + 1}">
               <th scope="row">${number}</th>
-              <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a><audio controls src=${
-              preview ? previewURL : null
-            }>Your browser does not suppor the <code>audio</code> element.</audio></td>
+              <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a>${
+              preview ? audioElement : ''
+            }</td>
             <tr>`
           );
         }
