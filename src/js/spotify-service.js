@@ -134,28 +134,21 @@ export default class SpotifyService {
     return [access_token, refresh_token, expires_at];
   }
 
-  static async getUserData(access_token) {
-    try {
-      fetch('https://api.spotify.com/v1/me', {
-        headers: {
-          Authorization: 'Bearer ' + access_token,
-        },
-      }).then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
+  static getUserData(access_token) {
+    return fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: 'Bearer ' + access_token,
+      },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
         }
+        return response.json();
+      })
+      .catch(function (error) {
+        return Error(error);
       });
-      // .then((data) => {
-      //   console.log(data);
-      // })
-      // .catch((error) => {
-      //   console.error(error);
-      // });
-    } catch (error) {
-      return error.message;
-    }
   }
 
   static getPlaylist(access_token) {

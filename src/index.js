@@ -17,18 +17,7 @@ import SpotifyService from './js/spotify-service.js';
   }
 
   function getUserData() {
-    fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: 'Bearer ' + access_token,
-      },
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw await response.json();
-        }
-      })
+    SpotifyService.getUserData(access_token)
       .then((data) => {
         console.log(data);
         let name = data.display_name;
