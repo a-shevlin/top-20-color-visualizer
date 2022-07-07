@@ -1,4 +1,4 @@
-# Spotify Color 
+# Top 20 Color Visualizer
 
 #### A simple website that shows Spotify user's playlist, top artists, and top tracks.
 
