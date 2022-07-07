@@ -170,5 +170,6 @@ button:active {
 .overlay h1 {
   cursor: pointer;
   text-align: center;
+  font-size: 20px;
   text-shadow: -1px 1px rgba(202, 202, 202, 0.692);
 }
