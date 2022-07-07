@@ -37,6 +37,12 @@ body {
   background-size: 400% 400%;
 }
 
+#main h1 {
+  text-shadow: -1px 1px rgba(28, 247, 119, 0.692);
+  opacity: 90%;
+  animation: gradient 4s ease infinite;
+}
+
 #profileImage {
   border-radius: 50px;
   width: 100px;
@@ -79,6 +85,10 @@ button:active {
 
 #topTables {
   margin-top: 50px;
+}
+
+.table {
+  opacity: 90%;
 }
 
 #artists{
