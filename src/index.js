@@ -81,47 +81,66 @@ import SpotifyService from './js/spotify-service.js';
   $('#changeBackground').on('click', function () {
     SpotifyService.getTopArtist(access_token)
       .then((data) => {
+        let length = getRandomInt(20);
+        console.log(length);
         let array = [];
         for (let i = 0; i < 5; i++) {
           let genres = data.items[i].genres;
-          array.push(genres);
-          console.log(genres);
+          genres.forEach(element => {
+            let split = element.split(" ");
+            array.push(split);
+          });
         }
-        for (let i = 0; i < 5; i++) {
-          if (array[i].indexOf('dance') + '' > -1) {
-            $('#main').css({
+        for (let i = 0; i < length; i++) {
+          if (array[i].includes('dance') === true) {
+            console.log('dance');
+            $('.overlay').show();
+            $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
             });
           }
-          if (array[i].indexOf('rap') + '' > -1) {
-            $('#main').css({
+          else if (array[i].includes('rap') === true) {
+            console.log('rap');
+            $('.overlay').show();
+            $('.overlay').css({
               'background-image': 'linear-gradient(blue, purple)',
             });
           }
-          if (array[i].indexOf('pop') + '' > -1) {
-            $('#main').css({
+          else if (array[i].includes('pop') === true) {
+            console.log('pop');
+            $('.overlay').show();
+            $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
             });
           }
-          if (array[i].indexOf('emo') + '' > -1) {
-            $('#main').css({
+          else if (array[i].includes('emo') === true) {
+            console.log('emo');
+            $('.overlay').show();
+            $('.overlay').css({
               'background-image': 'linear-gradient(black, white)',
             });
           }
-          if (array[i].indexOf('indie') + '' > -1) {
-            $('#main').css({
+          else if (array[i].includes('punk') === true) {
+            console.log('punk');
+            $('.overlay').show();
+            $('.overlay').css({
               'background-image': 'linear-gradient(yellow-green, yellow)',
             });
           } else {
-            //
+            $('.overlay').show();
+            $('.overlay').css({
+              'background-image': 'linear-gradient(dark-blue, green)',
+            });
           }
         }
       })
       .catch((error) => {
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   });
+  $('.overlay').on('click', function() {
+    $('.overlay').hide();
+  })
   $('#getTopTracks').on('click', function () {
     SpotifyService.getTopTracks(access_token)
       .then((data) => {
@@ -173,12 +192,10 @@ import SpotifyService from './js/spotify-service.js';
       .catch((error) => {
         clearMain();
         console.error(error);
-        // mainPlaceholder.innerHTML = errorTemplate(error.error);
       });
   });
 
   $('#playlistBody').on('click', 'td', function () {
-    // console.log('You clicked ' + this.id);
     const id = this.id;
     $('#tracklistBody').html('');
     SpotifyService.getPlaylistTracks(id, access_token)
@@ -186,9 +203,7 @@ import SpotifyService from './js/spotify-service.js';
         if (response instanceof Error) {
           throw Error('Error getting playlist tracks');
         }
-        // console.log(response);
         $('#tracklistTable').show();
-
         for (let i = 0; i < response.items.length; i++) {
           let trackName = response.items[i].track.name;
           let number = '# ' + (i + 1);
@@ -323,9 +338,9 @@ import SpotifyService from './js/spotify-service.js';
   });
 })();
 
-// function getRandomInt(max) {
-//   return Math.floor(Math.random() * max);
-// }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 // let randomNumber = getRandomInt(99);
 // let color = "#" + data.colors[randomNumber].hex;
 
