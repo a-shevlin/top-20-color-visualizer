@@ -199,6 +199,7 @@ import SpotifyService from './js/spotify-service.js';
   $('#playlistBody').on('click', 'td', function () {
     const id = this.id;
     $('#tracklistBody').html('');
+    $('#tracklistFrame').html('');
     SpotifyService.getPlaylistTracks(id, access_token)
       .then(function (response) {
         if (response instanceof Error) {
@@ -206,9 +207,10 @@ import SpotifyService from './js/spotify-service.js';
         }
         let premium =
           localStorage.getItem('product') === 'premium' ? true : false;
-        console.log(response);
+        // console.log(response);
         if (!premium) {
           $('#tracklistTable').show();
+          $('#tracklistiFrame').hide();
           for (let i = 0; i < response.items.length; i++) {
             // console.log(response.items[i]);
             const trackName = response.items[i].track.name;
@@ -216,10 +218,8 @@ import SpotifyService from './js/spotify-service.js';
             const url = response.items[i].track.external_urls.spotify;
             const previewURL = response.items[i].track.preview_url;
             let preview = false;
-            // let previewAudio;
             if (previewURL) {
               preview = true;
-              // previewAudio = new Audio(previewURL);
             }
             const id = response.items[i].track.id;
 
@@ -235,8 +235,10 @@ import SpotifyService from './js/spotify-service.js';
             );
           }
         } else {
+          $('#tracklistiFrame').show();
+          $('#tracklistTable').hide();
           $('#tracklistiFrame').append(
-            `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/${id}?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`
+            `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/${id}?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" id="iframe"></iframe>`
           );
         }
       })

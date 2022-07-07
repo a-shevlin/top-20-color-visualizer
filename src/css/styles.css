@@ -150,6 +150,13 @@ button:active {
   max-width: 250px;
 }
 
+#tracklistFrame {
+  display: none;
+  margin: auto;
+  width: fit-content;
+  max-width: 250px;
+}
+
 .overlay {
   display: none;
   overflow: hidden;
