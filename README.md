@@ -32,6 +32,8 @@
 
 * _Not having a profile picture on Spotify account will break part of the website_
 * _Not having listened to music on Spotify beforehand, at least for a day or two, will prevent Top 20 and Profile Background to not function correctly_
+*_not all genres are listed, so visualizer wont always work. so you have to press visualizer multiple times to work sometimes._
+*_if click playlist before top 20, sometimes top 20 will appear out of place._
 
 ## License
 
