@@ -24,6 +24,8 @@ import SpotifyService from './js/spotify-service.js';
         // let spotifyURI = data.external_urls.spotify;
         let image = data.images[0].url;
         // let country = data.country;
+        localStorage.setItem('product', data.product);
+
         $('#login').hide();
         $('#loggedin').show();
         $('#main').prepend(`
@@ -202,37 +204,41 @@ import SpotifyService from './js/spotify-service.js';
         if (response instanceof Error) {
           throw Error('Error getting playlist tracks');
         }
-        $('#tracklistTable').show();
-        for (let i = 0; i < response.items.length; i++) {
-          // console.log(response.items[i]);
-          const trackName = response.items[i].track.name;
-          const number = '# ' + (i + 1);
-          const url = response.items[i].track.external_urls.spotify;
-          const previewURL = response.items[i].track.preview_url;
-          let preview = false;
-          // let previewAudio;
-          if (previewURL) {
-            preview = true;
-            // previewAudio = new Audio(previewURL);
+        let premium =
+          localStorage.getItem('product') === 'premium' ? true : false;
+        console.log(response);
+        if (!premium) {
+          $('#tracklistTable').show();
+          for (let i = 0; i < response.items.length; i++) {
+            // console.log(response.items[i]);
+            const trackName = response.items[i].track.name;
+            const number = '# ' + (i + 1);
+            const url = response.items[i].track.external_urls.spotify;
+            const previewURL = response.items[i].track.preview_url;
+            let preview = false;
+            // let previewAudio;
+            if (previewURL) {
+              preview = true;
+              // previewAudio = new Audio(previewURL);
+            }
+            const id = response.items[i].track.id;
+
+            const audioElement = `<audio controls src=${previewURL}>Your browser does not suppor the <code>audio</code> element.</audio>`;
+
+            $('#tracklistBody').append(
+              `<tr id="tracklistName${i + 1}">
+                <th scope="row">${number}</th>
+                <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a>${
+                preview ? audioElement : ''
+              }</td>
+              <tr>`
+            );
           }
-          const id = response.items[i].track.id;
-
-          const audioElement = `<audio controls src=${previewURL}>Your browser does not suppor the <code>audio</code> element.</audio>`;
-
-          $('#tracklistBody').append(
-            `<tr id="tracklistName${i + 1}">
-              <th scope="row">${number}</th>
-              <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a>${
-              preview ? audioElement : ''
-            }</td>
-            <tr>`
+        } else {
+          $('#tracklistiFrame').append(
+            `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/${id}?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`
           );
         }
-        // SpotifyService.getTrack(access_token, '30y6NZd955BKpgECulOA6H').then(
-        //   function (response) {
-        //     console.log(response.preview_url);
-        //   }
-        // );
       })
       .catch(function (error) {
         console.log(error);
@@ -277,6 +283,7 @@ import SpotifyService from './js/spotify-service.js';
   let access_token = localStorage.getItem('access_token') || null;
   let refresh_token = localStorage.getItem('refresh_token') || null;
   let expires_at = localStorage.getItem('expires_at') || null;
+  let product = localStorage.getItem('product') || null;
 
   // References for HTML rendering
   const mainPlaceholder = document.getElementById('main');
