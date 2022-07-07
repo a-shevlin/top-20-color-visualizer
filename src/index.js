@@ -86,6 +86,7 @@ import SpotifyService from './js/spotify-service.js';
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
+            
             });
           }
           else if (array[i].includes('rap') === true) {
