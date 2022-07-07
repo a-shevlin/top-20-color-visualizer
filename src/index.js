@@ -199,7 +199,6 @@ import SpotifyService from './js/spotify-service.js';
   $('#playlistBody').on('click', 'td', function () {
     const id = this.id;
     $('#tracklistBody').html('');
-    $('#tracklistFrame').html('');
     SpotifyService.getPlaylistTracks(id, access_token)
       .then(function (response) {
         if (response instanceof Error) {
@@ -235,6 +234,10 @@ import SpotifyService from './js/spotify-service.js';
             );
           }
         } else {
+          if ($('#iframe').length) {
+            const iframe = document.getElementById('iframe');
+            iframe.remove();
+          }
           $('#tracklistiFrame').show();
           $('#tracklistTable').hide();
           $('#tracklistiFrame').append(
