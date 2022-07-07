@@ -204,7 +204,7 @@ import SpotifyService from './js/spotify-service.js';
         }
         $('#tracklistTable').show();
         for (let i = 0; i < response.items.length; i++) {
-          console.log(response.items[i]);
+          // console.log(response.items[i]);
           const trackName = response.items[i].track.name;
           const number = '# ' + (i + 1);
           const url = response.items[i].track.external_urls.spotify;
@@ -222,7 +222,7 @@ import SpotifyService from './js/spotify-service.js';
               <th scope="row">${number}</th>
               <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a><audio controls src=${
               preview ? previewURL : null
-            }</td>
+            }>Your browser does not suppor the <code>audio</code> element.</audio></td>
             <tr>`
           );
         }
