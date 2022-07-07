@@ -35,6 +35,7 @@ This webpage allows a user to sign into spotify. Upon signing in they get the op
 * _Not having listened to music on Spotify beforehand, at least for a day or two, will prevent Top 20 and Profile Background to not function correctly_
 * _not all genres are listed, so visualizer wont always work. so you have to press visualizer multiple times to work sometimes._
 * _if click playlist before top 20, sometimes top 20 will appear out of place._
+* _if on gh-pages after login redirects to https://a-shevlin.github.io/ instead of https://a-shevlin.github.io/top-20-color-visualizer/ however the login information is cached and if the page is loaded directly after login the user info will be displayed._
 
 
 ## License
