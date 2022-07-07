@@ -27,14 +27,37 @@ body {
 #login,
 #loggedin {
     display: none;
-}
 
+}
+#login-button {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-60%, -56%);
+  padding: 20px;
+  align-items: center;
+
+}
+#login h1 {
+  padding: 60px;
+  text-align: center;
+  background: local;
+  font-size: xx-large;
+  text-shadow: 2px 2px red;
+  
+}
 #main {
   text-align: right;
   font-family: 'Rubik', sans-serif;
   font-weight: 300;
   animation: gradient 4s ease infinite;
   background-size: 400% 400%;
+}
+
+#main h1 {
+  text-shadow: -1px 1px rgba(28, 247, 119, 0.692);
+  opacity: 90%;
+  animation: gradient 4s ease infinite;
 }
 
 #profileImage {
@@ -75,10 +98,15 @@ button:active {
 #logout-button {
   float: right;
   margin-right: 33px;
+  
 }
 
 #topTables {
   margin-top: 50px;
+}
+
+.table {
+  opacity: 90%;
 }
 
 #artists{
@@ -137,4 +165,5 @@ button:active {
 
 .overlay h1 {
   text-align: center;
+  text-shadow: -1px 1px rgba(202, 202, 202, 0.692);
 }
