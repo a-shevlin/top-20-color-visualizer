@@ -27,8 +27,25 @@ body {
 #login,
 #loggedin {
     display: none;
-}
 
+}
+#login-button {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-60%, -56%);
+  padding: 20px;
+  align-items: center;
+
+}
+h1 {
+  padding: 60px;
+  text-align: center;
+  background: local;
+  font-size: xx-large;
+  text-shadow: 2px 2px red;
+  
+}
 #main {
   text-align: right;
   font-family: 'Rubik', sans-serif;
@@ -75,6 +92,7 @@ button:active {
 #logout-button {
   float: right;
   margin-right: 33px;
+  
 }
 
 #topTables {
