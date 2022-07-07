@@ -38,7 +38,7 @@ body {
   align-items: center;
 
 }
-h1 {
+#login h1 {
   padding: 60px;
   text-align: center;
   background: local;
@@ -165,4 +165,5 @@ button:active {
 
 .overlay h1 {
   text-align: center;
+  text-shadow: -1px 1px rgba(202, 202, 202, 0.692);
 }
