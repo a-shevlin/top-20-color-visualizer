@@ -82,6 +82,7 @@ button {
   display: inline-block;
   border: 2px inset rgba(29, 168, 103, 0.493);
   border-radius: 50px;
+  margin-bottom: 10px;
   box-sizing: border-box;
   box-shadow: 0px 3px rgba(78, 78, 78, 0.39);
 }
@@ -134,9 +135,6 @@ button:active {
   min-width: 100px;
 }
 
-.trackName {
-  width: 200px;
-}
 
 #playlistTable {
   display: none;
@@ -149,7 +147,11 @@ button:active {
   display: none;
   margin: auto;
   width: fit-content;
-  max-width: 250px;
+  max-width: 300px;
+}
+
+.trackName {
+  width: 55px;
 }
 
 .overlay {
