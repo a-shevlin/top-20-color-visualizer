@@ -1,6 +1,6 @@
 # Spotify Color 
 
-#### (Brief Description of Application)
+#### A simple website that shows Spotify user's playlist, top artists, and top tracks.
 
 #### By Alex Shevlin, Seung Lee, Caroline Cerussi, Donovan Weber, Jacob Palaoro
 
@@ -14,7 +14,6 @@
 * _See **package.json** for full list of dependencies._
 
 ## Description
-
 ## Setup/Installation Requirements
 
 * _clone repo to pc_
