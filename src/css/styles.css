@@ -137,6 +137,7 @@ a:hover:visited {
   border-radius: 10px;
   overflow: hidden;
   width: fit-content;
+  max-width: 600px;
   margin: auto;
 }
 
@@ -154,7 +155,7 @@ a:hover:visited {
 
 .artistName {
   width: fit-content;
-  min-width: 100px;
+  min-width: 40px;
 }
 
 
@@ -165,7 +166,7 @@ a:hover:visited {
   overflow: hidden;
   margin: auto;
   width: fit-content;
-  max-width: 400px;
+  max-width: 300px;
 }
 
 #tracklistTable {

@@ -79,7 +79,6 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = errorTemplate('Error Getting Top Artists');
       });
   });
-
   $('#changeBackground').on('click', function () {
     SpotifyService.getTopArtist(access_token)
       .then((data) => {
