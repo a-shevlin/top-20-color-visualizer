@@ -35,9 +35,19 @@ import SpotifyService from './js/spotify-service.js';
       .catch((error) => {
         clearMain();
         console.error(error);
-        mainPlaceholder.innerHTML = errorTemplate('Error Getting User Data');
+        // try to refresh access token if error in getting user info
+        SpotifyService.refreshToken(client_id, refresh_token).then(function (
+          response
+        ) {
+          if (response instanceof Error) {
+            throw Error(`Refresh Token Error: ${response.message}`);
+          }
+          processTokenResponse(response);
+        });
+        // mainPlaceholder.innerHTML = errorTemplate('Error Getting User Data');
       });
   }
+
   $('#getTopArtist').on('click', function () {
     SpotifyService.getTopArtist(access_token)
       .then((data) => {
@@ -67,6 +77,7 @@ import SpotifyService from './js/spotify-service.js';
         mainPlaceholder.innerHTML = errorTemplate('Error Getting Top Artists');
       });
   });
+
   $('#changeBackground').on('click', function () {
     SpotifyService.getTopArtist(access_token)
       .then((data) => {
@@ -75,8 +86,8 @@ import SpotifyService from './js/spotify-service.js';
         let array = [];
         for (let i = 0; i < 5; i++) {
           let genres = data.items[i].genres;
-          genres.forEach(element => {
-            let split = element.split(" ");
+          genres.forEach((element) => {
+            let split = element.split(' ');
             array.push(split);
           });
         }
@@ -87,29 +98,26 @@ import SpotifyService from './js/spotify-service.js';
             $('.overlay').css({
               'background-image': 'linear-gradient(-45deg, red, yellow)',
             });
-          }
-          else if (array[i].includes('rap') === true) {
+          } else if (array[i].includes('rap') === true) {
             console.log('rap');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(blue, purple)',
             });
-          }
-          else if (array[i].includes('pop') === true) {
+          } else if (array[i].includes('pop') === true) {
             console.log('pop');
             $('.overlay').show();
             $('.overlay').css({
-              'background-image': 'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
+              'background-image':
+                'linear-gradient(-45deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%)',
             });
-          }
-          else if (array[i].includes('emo') === true) {
+          } else if (array[i].includes('emo') === true) {
             console.log('emo');
             $('.overlay').show();
             $('.overlay').css({
               'background-image': 'linear-gradient(black, white)',
             });
-          }
-          else if (array[i].includes('punk') === true) {
+          } else if (array[i].includes('punk') === true) {
             console.log('punk');
             $('.overlay').show();
             $('.overlay').css({
@@ -127,9 +135,11 @@ import SpotifyService from './js/spotify-service.js';
         console.error(error);
       });
   });
-  $('.overlay').on('click', function() {
+
+  $('.overlay').on('click', function () {
     $('.overlay').hide();
-  })
+  });
+
   $('#getTopTracks').on('click', function () {
     SpotifyService.getTopTracks(access_token)
       .then((data) => {
@@ -194,16 +204,33 @@ import SpotifyService from './js/spotify-service.js';
         }
         $('#tracklistTable').show();
         for (let i = 0; i < response.items.length; i++) {
-          let trackName = response.items[i].track.name;
-          let number = '# ' + (i + 1);
-          let url = response.items[i].track.external_urls.spotify;
+          console.log(response.items[i]);
+          const trackName = response.items[i].track.name;
+          const number = '# ' + (i + 1);
+          const url = response.items[i].track.external_urls.spotify;
+          const previewURL = response.items[i].track.preview_url;
+          let preview = false;
+          // let previewAudio;
+          if (previewURL) {
+            preview = true;
+            // previewAudio = new Audio(previewURL);
+          }
+          const id = response.items[i].track.id;
+
           $('#tracklistBody').append(
             `<tr id="tracklistName${i + 1}">
               <th scope="row">${number}</th>
-              <td class="userPlaylists"><a href="${url}" target="_blank"><strong>${trackName}</strong></a></td>
+              <td class="userPlaylists" id="${id}"><a href="${url}"><strong>${trackName}</strong></a><audio controls src=${
+              preview ? previewURL : null
+            }</td>
             <tr>`
           );
         }
+        // SpotifyService.getTrack(access_token, '30y6NZd955BKpgECulOA6H').then(
+        //   function (response) {
+        //     console.log(response.preview_url);
+        //   }
+        // );
       })
       .catch(function (error) {
         console.log(error);
@@ -251,7 +278,7 @@ import SpotifyService from './js/spotify-service.js';
 
   // References for HTML rendering
   const mainPlaceholder = document.getElementById('main');
-  const oauthPlaceholder = document.getElementById('oauth');
+  // const oauthPlaceholder = document.getElementById('oauth');
 
   // If the user has accepted the authorize request spotify will come back to your application with the code in the response query string
   // Example: http://127.0.0.1:8080/?code=NApCCg..BkWtQ&state=profile%2Factivity
